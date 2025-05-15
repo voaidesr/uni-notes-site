@@ -2,11 +2,11 @@
 {"dg-publish":true,"permalink":"/courses/maths/linear-algebra/curs-7/"}
 ---
 
-### Index 
 
-[[Courses/Maths/Linear Algebra/Curs 7#Proiecții și Simetrii proiecții simetrii\|Curs 7#Proiecții și Simetrii proiecții simetrii]]
-[[Courses/Maths/Linear Algebra/Curs 7#Vectori proprii. Valori proprii. Diagonalizarea\|Curs 7#Vectori proprii. Valori proprii. Diagonalizarea]]
-
+```ad-index
+[[Curs 7#Proiecții și Simetrii proiecții simetrii|Proiecții și simetrii]]
+[[Curs 7#Vectori proprii. Valori proprii. Diagonalizarea|Vectori proprii, Valori proprii, Diagonalizarea]]
+```
 ### Proiecții și Simetrii #proiecții #simetrii
 
 Fie un spațiu vectorial $(V, +,  \cdot)|_{\mathbb{K}}$,  astfel încât $V = V_1 \oplus V_2$.
@@ -132,13 +132,14 @@ $$
 \dim V_\lambda \le m_\lambda
 $$
 ```ad-Teorema
-**Teorema de diagonalizare:**
-```
-$$
+title: Teorema de Diagonalizare
+Fie $f \in End(V)$.
+$
 \exists \mathcal{R}  = \{ e_1, \dots, e_n \} \text{ în } V \text{ astfel încât }
 [f]_{\mathcal{R,R}} \text{ diagonală } \Leftrightarrow 
 \begin{cases}
 1) & \lambda_1, \dots, \lambda_k \in \mathbb{K} \\
 2) & V_{\lambda_i}= m_i, & \forall i \in \overline{1,k}
 \end{cases}
-$$
+$
+```
