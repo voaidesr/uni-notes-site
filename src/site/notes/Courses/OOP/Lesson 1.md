@@ -5,13 +5,12 @@
 
 ## Completări aduse de C++
 
-```ad-index
-[[Lesson 1#Supraîncărcarea funcțiilor|Supraîncărcarea funcțiilor]]
-[[Lesson 1#Pointeri|Pointeri]]
-[[Lesson 1#Const|Const]]
-[[Lesson 1#Tipul referință|Referință]]
-[[Lesson 1#Principiile POO|Principiile POO]]
-```
+[[Courses/OOP/Lesson 1#Supraîncărcarea funcțiilor\|Supraîncărcarea funcțiilor]]
+[[Courses/OOP/Lesson 1#Pointeri\|Pointeri]]
+[[Courses/OOP/Lesson 1#Const\|Const]]
+[[Courses/OOP/Lesson 1#Tipul referință\|Referință]]
+[[Courses/OOP/Lesson 1#Principiile POO\|Principiile POO]]
+
 
 #polimorfism
 ### Supraîncărcarea funcțiilor:
