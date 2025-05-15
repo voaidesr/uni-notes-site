@@ -131,17 +131,12 @@ Fie $f \in End(V)$ Vectorii proprii corespunzători la valori proprii distincte 
 $$
 \dim V_\lambda \le m_\lambda
 $$
-```ad-Teorema
-title: Teorema de Diagonalizare
-Fie $f \in End(V)$.
 
-\[
-\exists \mathcal{R} = \{ e_1, \dots, e_n \} \text{ în } V \text{ astfel încât }
-[f]_{\mathcal{R,R}} \text{ diagonală } \Leftrightarrow
+$$
+\exists \mathcal{R}  = \{ e_1, \dots, e_n \} \text{ în } V \text{ astfel încât }
+[f]_{\mathcal{R,R}} \text{ diagonală } \Leftrightarrow 
 \begin{cases}
-\lambda_1, \dots, \lambda_k \in \mathbb{K} \\
-V_{\lambda_i} = m_i,\ \forall i \in \overline{1,k}
+1) & \lambda_1, \dots, \lambda_k \in \mathbb{K} \\
+2) & V_{\lambda_i}= m_i, & \forall i \in \overline{1,k}
 \end{cases}
-\]
-
-```
+$$
