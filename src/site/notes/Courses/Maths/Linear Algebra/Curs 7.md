@@ -115,8 +115,9 @@ Este echivalent cu $P_A(\lambda) = 0$.
 
 De asemenea, polinomul caracteristic se poate rescrie 
 $$
-P_A(\lambda) = (-1)^n(\lambda - \lambda_1)^{m_1}(\lambda - \lambda_2)^{m_2}\dots (\lambda - \lambda_n)^{m_n} \quad \text{ unde } \sum_{i=0}^nm_i = n, \text{ multiplicitățile}
+P_A(\lambda) = (-1)^n(\lambda - \lambda_1)^{m_1}(\lambda - \lambda_2)^{m_2}\dots (\lambda - \lambda_n)^{m_n} \quad \text{ unde } \sum_{i=0}^nm_i = n
 $$
+
 ```ad-Notation
 $
 \sigma_f = \{ \lambda_1, \dots, \lambda_n \} \text{ - spectrul lui f}
