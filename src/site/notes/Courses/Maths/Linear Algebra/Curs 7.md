@@ -134,6 +134,7 @@ $$
 ```ad-Teorema
 title: Teorema de Diagonalizare
 Fie $f \in End(V)$.
+
 $
 \exists \mathcal{R}  = \{ e_1, \dots, e_n \} \text{ în } V \text{ astfel încât }
 [f]_{\mathcal{R,R}} \text{ diagonală } \Leftrightarrow 
@@ -142,4 +143,5 @@ $
 2) & V_{\lambda_i}= m_i, & \forall i \in \overline{1,k}
 \end{cases}
 $
+
 ```
