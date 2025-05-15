@@ -3,10 +3,10 @@
 ---
 
 
-```ad-index
-[[Curs 7#Proiecții și Simetrii proiecții simetrii|Proiecții și simetrii]]
-[[Curs 7#Vectori proprii. Valori proprii. Diagonalizarea|Vectori proprii, Valori proprii, Diagonalizarea]]
-```
+	
+[[Courses/Maths/Linear Algebra/Curs 7#Proiecții și Simetrii proiecții simetrii\|Proiecții și simetrii]]
+[[Courses/Maths/Linear Algebra/Curs 7#Vectori proprii. Valori proprii. Diagonalizarea\|Vectori proprii, Valori proprii, Diagonalizarea]]
+
 ### Proiecții și Simetrii #proiecții #simetrii
 
 Fie un spațiu vectorial $(V, +,  \cdot)|_{\mathbb{K}}$,  astfel încât $V = V_1 \oplus V_2$.
@@ -115,7 +115,7 @@ Este echivalent cu $P_A(\lambda) = 0$.
 
 De asemenea, polinomul caracteristic se poate rescrie 
 $$
-P_A(\lambda) = (-1)^n(\lambda - \lambda_1)^{m_1}(\lambda - \lambda_2)^{m_2}\dots (\lambda - \lambda_n)^{m_n} \qquad \text{ unde } \sum_{i=0}^nm_i = n, \text{ multiplicitățile}
+P_A(\lambda) = (-1)^n(\lambda - \lambda_1)^{m_1}(\lambda - \lambda_2)^{m_2}\dots (\lambda - \lambda_n)^{m_n} \quad \text{ unde } \sum_{i=0}^nm_i = n, \text{ multiplicitățile}
 $$
 ```ad-Notation
 $
@@ -131,15 +131,17 @@ Fie $f \in End(V)$ Vectorii proprii corespunzători la valori proprii distincte 
 $$
 \dim V_\lambda \le m_\lambda
 $$
-```ad-Teorema
-title: Teorema de Diagonalizare
+**Teorema de diagonalizare:**
+
 Fie $f \in End(V)$.
-$
+$$
 \exists \mathcal{R}  = \{ e_1, \dots, e_n \} \text{ în } V \text{ astfel încât }
 [f]_{\mathcal{R,R}} \text{ diagonală } \Leftrightarrow 
+$$
+
+$$
 \begin{cases}
 1) & \lambda_1, \dots, \lambda_k \in \mathbb{K} \\
 2) & V_{\lambda_i}= m_i, & \forall i \in \overline{1,k}
 \end{cases}
-$
-```
+$$
