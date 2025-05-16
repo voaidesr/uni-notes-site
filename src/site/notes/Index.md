@@ -10,6 +10,3 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 2. **Geometrie și Algebră liniară**
 	- [[Courses/Maths/Linear Algebra/Curs 7\|Curs 7]]
 	- [[Courses/Maths/Linear Algebra/Curs 8\|Curs 8]]
->[!proof]
->abc
-
