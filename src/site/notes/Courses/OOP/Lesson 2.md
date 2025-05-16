@@ -93,7 +93,7 @@ class Curs {
 ##### Polimorfisme 
 - claritate/cod mai sigur
 - poate fi la compilare `max(int)` vs `max(float)`
-- la execuție (runtime): **RTTI** (see [[Courses/OOP/Lesson9\|RTTI]])
+- la execuție (runtime): **RTTI** (see [[Courses/OOP/Lesson 9\|RTTI]])
 
 ##### Șabloane (templates) 
 - cod mai sigur, reutilizare de cod 
