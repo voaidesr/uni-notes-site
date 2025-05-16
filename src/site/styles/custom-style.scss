@@ -10,4 +10,27 @@ body {
     //  h1 {
     //   color: black;
     //  }
+  .callout[data-callout="proof"] {
+    --callout-color: 173, 216, 230; /* pastel blue: light RGB */
+    --callout-icon: lucide-book-open;
+    background-color: rgba(166, 224, 244, 0.15); /* pastel blue w/ transparency */
+  }
+
+  .callout[data-callout="definition"] {
+    --callout-color: 255, 192, 203; /* pastel red/pink */
+    --callout-icon: lucide-book;
+    background-color: rgba(121, 13, 31, 0.18);
+  }
+
+  .callout[data-callout="notation"] {
+    --callout-color: 180, 180, 180; /* light grey */
+    --callout-icon: lucide-list;
+    background-color: rgba(200, 200, 200, 0.12);
+  }
+
+  .callout[data-callout="theorem"] {
+    --callout-color: 216, 191, 216; /* thistle */
+    --callout-icon: lucide-scroll;
+    background-color: rgba(147, 61, 147, 0.15);
+  }
 }
