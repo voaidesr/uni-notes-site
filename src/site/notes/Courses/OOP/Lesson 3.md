@@ -14,7 +14,7 @@
 
 Singura diferență între `struct` și `class` este modificatorul de acces, struct fiind **public** by default, iar class fiind **private**.
 
-În C++, struct-urile pot avea funcții membru. Existența struct asigură compatibilitate cu cod mai vechi.
+În C++, struct-urile pot avea funcții membru. Existența `struct` asigură compatibilitate cu cod mai vechi.
 
 #### Union 
 
@@ -170,7 +170,7 @@ int main() {
 
 **Implicite**
 
-- orice funcție definită într-o clasă e automat implicită 
+- orice funcție definită într-o clasă e automat `inline`
 
 ```cpp 
 class myclass{
