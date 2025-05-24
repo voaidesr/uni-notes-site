@@ -35,7 +35,7 @@ public:
 2) nu se folosește auto, extern, register
 ```
 
-#### Scope resolution operator `::`
+#### Scope resolution operator `::` [[Lesson 4#Operatorul de rezoluție de scop ` `|See here]]
 
 `::` Este folosit pentru a accesa un membru care aparține unui anumit namespace, clase, structură sau pentru a defini funcții în afara clasei.
 
@@ -98,8 +98,6 @@ class Curs {
 ##### Șabloane (templates) 
 - cod mai sigur, reutilizare de cod 
  
-		
-
 
 
 
