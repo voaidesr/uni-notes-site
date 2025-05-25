@@ -230,6 +230,6 @@ Un **obiect** este o instanță a unei clase, are anumite stări (valoarea) și 
 
 #moștenire
 
-**Moștenire**  = posibilitatea de a extinde o clasă prin adăugarea de noi funcționalități
+**Moștenire**  = posibilitatea de a extinde o clasă prin adăugarea de noi funcționalități [[Courses/OOP/Lesson 5\|Vezi aici]]
 
 

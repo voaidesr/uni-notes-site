@@ -65,7 +65,7 @@ int main() {
 
 >[!warning]
 >Datele membre statice `const` trebuie să fie inițializate în clasă 
->Datele membre care **nu** sunt const  trebuie inițializate în afara clasei
+>Datele membre care **nu** sunt constante  trebuie inițializate în afara clasei
 
 Dă eroare de compilare: 
 

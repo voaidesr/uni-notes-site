@@ -86,7 +86,7 @@ class Curs {
 };
 ```
 
-##### Moștenirea (ierarhia de clase) 
+##### Moștenirea (ierarhia de clase) [[Courses/OOP/Lesson 5\|See more]] 
 - reprezintă o relație între clase, în care o clasă moștenește structura și comportarea definită în una sau mai multe clase
 - utilă pentru **reutilizare de cod**
 
