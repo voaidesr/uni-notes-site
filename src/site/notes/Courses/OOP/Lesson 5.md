@@ -325,3 +325,4 @@ Dacă în clasa de bază o componentă era publică, iar moștenirea este privat
 Compatibilitatea se manifestă sub forma unor **conversii explicite de tip**:
 - din obiect derivat în obiect de bază
 - din pointer/referință la obiect derivat în pointer/referință la obiect de bază
+

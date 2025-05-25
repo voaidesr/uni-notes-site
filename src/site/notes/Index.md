@@ -10,7 +10,13 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 	- [[Courses/OOP/Lesson 3\|Curs 3]]
 	- [[Courses/OOP/Lesson 4\|Curs 4]]
 	- [[Courses/OOP/Lesson 5\|Curs 5]]
-2. **Geometrie și Algebră liniară**
+	- [[Courses/OOP/Lesson 6\|Curs 6]]
+2. **Structuri de Date** 
+3. **Baze de date**
+4. **Limbaje formale și automate**
+5. **Geometrie și Algebră liniară**
 	- [[Courses/Maths/Linear Algebra/Curs 7\|Curs 7]]
 	- [[Courses/Maths/Linear Algebra/Curs 8\|Curs 8]]
-3.  **Logică Matematică și Computațională**
+6.  **Logică Matematică și Computațională**
+	
+

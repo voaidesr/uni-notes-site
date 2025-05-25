@@ -232,4 +232,4 @@ Un **obiect** este o instanță a unei clase, are anumite stări (valoarea) și 
 
 **Moștenire**  = posibilitatea de a extinde o clasă prin adăugarea de noi funcționalități [[Courses/OOP/Lesson 5\|Vezi aici]]
 
-
+**Polimorfismul** este un concept fundamental în programarea orientată pe obiecte care permite tratarea obiectelor de tipuri diferite prin intermediul unei interfețe comune.
