@@ -4,7 +4,6 @@
 
 ### Index
 [[Courses/OOP/Lesson 4#Variabile Statice\|Variabile Statice]]
-[[Lesson 4#Operatorul de rezoluție de scop ` ` Lesson 2 Scope resolution operator ` ` Lesson 4 Operatorul de rezoluție de scop ` ` See here see more|Operatorul de rezoluție de scop]]
 [[Courses/OOP/Lesson 4#Supraîncărcarea operatorilor\|Supraîncărcarea operatorilor]]
 ### Variabile Statice 
 
