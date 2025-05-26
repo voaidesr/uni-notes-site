@@ -171,7 +171,7 @@ Q(x) = 0 \iff x_1 = x_2 = x_3 = 0 \iff x = \sum_{i = 1}^3x_ie_i = 0_{\mathbb{R}^
 $$
 Deci, (1), (2), $\implies$ $Q$ este pozitiv definită 
 
-###### ***Exemplul 2***
+##### ***Exemplul 2***
 
 Fie 
 $$
@@ -204,18 +204,25 @@ Aflăm și forma pătratică
 $$
 Q(x) = g(x, x) = \sum_{i = 1}^3g_{ii}x_i^2 + 2\sum_{i<j}g_{ij}x_ix_i = x_1^2 + 4x_2^2 + 6x_1x_2 + 4x_1x_3 - 2x_2x_3
 $$
-##### ***Problemă***
+##### ***Problemă*** - Forma canonică 
 Fie $Q: V \to \mathbb{K}$ formă pătratică. 
 $\exists \mathcal{R} = \{e_1 \dots e_n\}$ reper în $V$ astfel încât: 
 $$
 G = \begin{pmatrix}
-d_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
-0 & d_2 & \cdots & 0 & 0 & \cdots & 0 \\
+a_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+0 & a_2 & \cdots & 0 & 0 & \cdots & 0 \\
 \vdots & \vdots & \ddots & \vdots & \vdots & & \vdots \\
-0 & 0 & \cdots & d_k & 0 & \cdots & 0 \\
+0 & 0 & \cdots & a_k & 0 & \cdots & 0 \\
 0 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
 \vdots & \vdots &  & \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & \cdots & 0 & 0 & \cdots & 0
 \end{pmatrix} ?
 $$
 (i.e., G este [[Courses/Maths/Linear Algebra/Curs 7#Vectori proprii. Valori proprii. Diagonalizarea\|diagonalizabilă]])
+
+Dacă există, atunci #forma_canonică
+$$
+Q(x) = a_1x_1^2 + \dots + a_kx_k^2
+$$
+Unde $r = \operatorname{rg} G$. (Se numește ***forma canonică***)
+
