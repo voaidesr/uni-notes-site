@@ -105,8 +105,98 @@ $
 >Mai mult:
 >$g$ se numește **nedegenerat** $\Leftrightarrow$ $\operatorname{ker} g = \{ 0_V \}$
 
+**Observație**
+Fie $\mathcal{R} = \{ e_1, \dots, e_n \}$ reper în $V$ și $x \in \operatorname{Ker} g$
+$$
+\begin{cases}
+g(x, e_1) = 0 \\
+\vdots \\
+g(x, e_n) = 0
+\end{cases}
+\implies
+\begin{cases}
+\sum_{i=1}^m g_{1i} x_i = 0 \\
+\vdots \\
+\sum_{i=1}^m g_{ni} x_i = 0
+\end{cases}
+$$
+Sistemul este un SLO. Are soluție unică nenulă  $\Leftrightarrow$ $\operatorname{det}((g_{ij})_{i,j}) = \operatorname{det} G \neq 0$
 
+>[!definition]
+> Fie $Q : V \to \mathbb{R}$ fromă pătratică reală 
+> Se numește pozitiv definită dacă și numai dacă:
+> 		1) $\operatorname{Q}(x) > 0, \quad \forall x\neq 0_V$ și
+> 		2) $\operatorname{Q}(x) = 0 \Leftrightarrow x = 0_V$
 
+Fie $g$ forma polară asociată lui $Q$. Dacă $Q$ este pozitivă definită, atunci $g$ este pozitiv definită. 
 
+***Proprietate***
+$\text{Fie } g \in L^s(V, V; \mathbb{R}).$
+$g$ pozitiv definită $\implies$ $g$ este nedegenerată
 
+##### ***Exemplul 1***
 
+Fie
+$$
+g : \mathbb{R}^3 \times \mathbb{R}^3  \to \mathbb{R}, \quad g(x,y) = x_1y_1 + x_2y_2 + x_3y_3
+$$
+- $G$ = ? -> matricea asociată lui $g$ în raport cu reperul canonic
+- $Q: \mathbb{R}^3  \to \mathbb{R}$ forma pătratică asociată lui $g$. Este pozitiv definită? 
+
+***Soluție***
+
+a) $g(x,y) = \sum_{i,j=1}^3g_{ij}x_iy_j = x_1y_1 + x_2y_2 + x_3y_3 = \sum_{i = 1}^3x_iy_i$
+
+Deci:
+$$
+G = I_3 = 
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{pmatrix}
+$$
+b) $Q$ formă pătratică. 
+
+$$
+Q(x) = g(x, x) = \sum_{i = 1}^3x_i^2
+$$
+Avem 
+$$
+Q(x) > 0, \quad \forall x \in \mathbb{R}^3 \quad (1)
+$$
+Și
+$$
+Q(x) = 0 \iff x_1 = x_2 = x_3 = 0 \iff x = \sum_{i = 1}^3x_ie_i = 0_{\mathbb{R}^3} \quad (2)
+$$
+Deci, (1), (2), $\implies$ $Q$ este pozitiv definită 
+
+###### ***Exemplul 2***
+
+Fie 
+$$
+g : \mathbb{R}^3 \times \mathbb{R}^3  \to \mathbb{R}, \quad G = 
+\begin{pmatrix}
+1 & 3 & 2 \\
+3 & 4 & -1\\
+2 & -1 & 0
+\end{pmatrix}
+$$
+$g$ forma biliniară, $G$ matricea asociată lui $g$ în raport cu reperul canonic $\mathcal{R}_0$
+
+a) $g$ este formă simetrică 
+b) $g$ = ?, $Q : \mathbb{R}^3 \to \mathbb{R}$ formă pătratică asociată, $Q$ = ?  
+
+*Soluție*
+
+a) $G = G^{\top} \implies g\in L(\mathbb{R}^3, \mathbb{R}^3; \mathbb{R})$ 
+
+b)
+$$
+\begin{aligned}
+g(x,y) &= \sum_{i,j=1}^3 g_{ij} x_i y_j \\
+       &= x_1 y_1 + 3 x_1 y_2 + 2 x_1 y_3 \\
+       &\quad + 3 x_2 y_1 + 4 x_2 y_2 - x_2 y_3 \\
+       &\quad + 2 x_3 y_1 - 1 x_3 y_2
+\end{aligned}
+$$
