@@ -200,3 +200,22 @@ g(x,y) &= \sum_{i,j=1}^3 g_{ij} x_i y_j \\
        &\quad + 2 x_3 y_1 - 1 x_3 y_2
 \end{aligned}
 $$
+Aflăm și forma pătratică
+$$
+Q(x) = g(x, x) = \sum_{i = 1}^3g_{ii}x_i^2 + 2\sum_{i<j}g_{ij}x_ix_i = x_1^2 + 4x_2^2 + 6x_1x_2 + 4x_1x_3 - 2x_2x_3
+$$
+##### ***Problemă***
+Fie $Q: V \to \mathbb{K}$ formă pătratică. 
+$\exists \mathcal{R} = \{e_1 \dots e_n\}$ reper în $V$ astfel încât: 
+$$
+G = \begin{pmatrix}
+d_1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+0 & d_2 & \cdots & 0 & 0 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots & & \vdots \\
+0 & 0 & \cdots & d_k & 0 & \cdots & 0 \\
+0 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+\vdots & \vdots &  & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 0 & 0 & \cdots & 0
+\end{pmatrix} ?
+$$
+(i.e., G este [[Courses/Maths/Linear Algebra/Curs 7#Vectori proprii. Valori proprii. Diagonalizarea\|diagonalizabilă]])
