@@ -226,3 +226,10 @@ Q(x) = a_1x_1^2 + \dots + a_kx_k^2
 $$
 Unde $r = \operatorname{rg} G$. (Se numește ***forma canonică***)
 
+```ad-tip
+##### **Teorema Gauss**
+
+Fie $Q : V \to \mathbb{K}$ o formă pătratică. 
+
+$\exists \mathcal{R} = \{e_1, \dots, e_n \}$ reper în $V$ astfel încât $Q$ are o formă canonică. 
+```
