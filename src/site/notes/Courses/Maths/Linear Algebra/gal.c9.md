@@ -320,3 +320,67 @@ $$
 e_k = f_k + \sum_{i = 1}^{k-1}\alpha_{ki}e_i
 $$
 Condiția de ortogonalitate: 
+$$
+0 = \langle e_k, e_j \rangle = \langle f_k ,e_j \rangle + \sum_{i=1}^{k-1}\alpha_{ki}\langle e_i, e_j \rangle
+$$
+Din $P_{k-1}$ știm că $\langle e_i, e_j \rangle = \delta_{ij}$ (sunt ortogonali).
+Relația devine:
+$$
+0 = \langle f_k ,e_j \rangle + \alpha_{kj}\langle e_j, e_j \rangle \implies
+\alpha_{kj} = - \frac{\langle f_k ,e_j \rangle}{\langle e_j, e_j \rangle}
+$$
+Deci 
+$$
+e_k = f_k - \sum_{j=1}^{k-1}\frac{\langle f_k ,e_j \rangle}{\langle e_j, e_j \rangle}e_j
+$$
+$$
+\begin{aligned}
+\begin{cases}
+f_1 = e_1 \\
+\vdots\\
+f_k = \sum_{j=1}^{k-1} \frac{\langle f_k, e_j \rangle}{\langle e_j, e_j \rangle} e_j + e_k
+\end{cases}
+\quad &\implies \quad
+\mathrm{Sp}\{f_1, \dots, f_k\} = \mathrm{Sp}\{e_1, \dots, e_k\}
+\;\;\forall k=\overline{1,k}
+\end{aligned}
+$$
+
+Deci 
+$$
+\begin{cases}
+f_1 = e_1 \\
+f_2 = \frac{\langle f_2, e_1 \rangle}{\langle e_1, e_1 \rangle} e_1 + e_2 \\
+\vdots \\
+f_n = \frac{\langle f_n, e_1 \rangle}{\langle e_1, e_1 \rangle} e_1 + \dots + \frac{\langle f_n, e_{n-1} \rangle}{\langle e_{n-1}, e_{n-1} \rangle} e_{n-1} + e_n
+\end{cases}
+\quad
+A^{-1} = 
+\begin{pmatrix}
+1 & \frac{\langle f_2, e_1 \rangle}{\langle e_1, e_1 \rangle} & \cdots & \frac{\langle f_n, e_1 \rangle}{\langle e_1, e_1 \rangle} \\
+0 & 1 & \cdots & \frac{\langle f_n, e_2 \rangle}{\langle e_2, e_2 \rangle} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+$$
+Avem $\mathcal{R}' = \{e_1, \dots, e_n \}$ sistem de vectori ortogonali (doi câte doi). Este și sistem de generatori. 
+$$
+|\mathcal{R}'| = n = \operatorname{dim} V \implies \mathcal{R'} \quad\text{reper ortogonal}
+$$
+Schimbările de reper în Gram - Schmidt:
+$$
+\underbrace{\mathcal{R} = \{f_1,\dots,f_n\}}_{\text{bază inițială}}
+\;\xrightarrow{A}\;
+\underbrace{\mathcal{R}' = \{e_1,\dots,e_n\}}_{\text{bază ortogonală}}
+\;\xrightarrow{B}\;
+\underbrace{\mathcal{R}'' = \Bigl\{\tfrac{e_1}{\|e_1\|},\dots,\tfrac{e_n}{\|e_n\|}\Bigr\}}_{\text{bază ortonormală}}
+$$
+***Sunt la fel orientate.***
+
+***Observație***
+
+$v \neq 0_v$, atunci $\frac{v}{\|v\|}$ este versor. 
+$$
+g(\frac{v}{\|v\|},\frac{v}{\|v\|}) = \frac{1}{\|v\|^2}g(v,v) = \frac{\|v\|^2}{\|v\|^2} = 1
+$$
+
