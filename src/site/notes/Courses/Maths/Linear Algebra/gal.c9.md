@@ -61,3 +61,68 @@ A da un produs scalar $\iff$ A preciza un reper ortonormat.
 
 *Demonstrație*
 
+1. $\implies$
+$g: V \times V \to \mathbb{R}$ produs scalar, $\mathcal{R} = \{e_1, \dots, e_n \}$ reper
+
+$\mathcal{R}$ poate fi ales astfel încât relația $g(e_i,e_j) = \delta_{ij}, \quad \forall\,i,j = \overline{1,n}$  să fie respectată. 
+Atunci $\mathcal{R}$ este reper ortonormat. 
+
+2. $\impliedby$ 
+$\mathcal{R} = \{e_1, \dots, e_n \}$ reper ortonormat. Definim o funcție $g: V \times V \to \mathbb{R}$, astfel încât:
+$$
+g(e_i,e_j) = \delta_{ij}, \quad \forall\,i,j = \overline{1,n}
+$$
+$g$ -produs scalar 
+Extindem prin liniaritate
+$$
+g(x,y) = \sum_{i,j = 1}^ng_{ij}x_iy_j= \sum_{i=1}^nx_iy_i = x_1y_1 + \dots + x_ny_n
+$$
+Pentru că $g_{ij} = \delta_{ij}$ 
+
+### Exemplu
+
+$g_0 : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}, \quad g_0(x,y) = x_1y_1 + \dots  x_ny_n$  Produsul scalar **canonic**, $\mathcal{R}_0$ reperul canonic. (1)
+
+Avem
+$$
+g_0(e_i, e_j) = 0
+$$
+Deci $\mathcal{R}_0$ reper ortonormat *în raport cu* $g$. 
+
+$G = I_n$ - matricea asociată lui $g$ în raport cu $\mathcal{R}_0$ $\implies G = G^{\top}$ (2)
+
+(1), (2) $\implies$ $g_0 \in L^s(\mathbb{R}^n,\mathbb{R}^n;\mathbb{R})$ 
+$$
+g_0(x,x) = Q(x) = x_1^2 + \dots + x_n^2  
+
+\implies 
+
+\begin{cases}
+g_0(x,x) > 0, \quad \forall \, x \neq 0_{\mathbb{R}^n}\\
+g_0(x,x) = 0 \iff x = 0_{\mathbb{R}^n}
+\end{cases}
+$$
+Deci $g_0$ e pozitiv definită. 
+
+## Produs vectorial 
+
+$(\mathbb{R}^3, g_0)$ s.v.e.r cu str. canonică. Unde $g_0(x,y) = x_1y_1 + x_2y_2 + x_3y_3$
+
+Definim **produsul vectorial** $x \times y$ astfel: 
+1) Dacă $\{x, y \}$ SLD, atunci $x \times y = 0_{\mathbb{R}^3}$
+2) Dacă $\{x, y \}$ SLI, atunci avem: 
+
+a) 
+$$
+\| x \times y \| = 
+\begin{vmatrix}
+g_0(x,x) & g_0(x,y)\\
+g_0(y,x) & g_0(y,y)
+\end{vmatrix} =
+\|x\|^2\cdot\|y\|^2-g_0^2(x,y) 
+$$
+b) 
+$$
+g_0(x\times y, x) = g_0(x\times y, y) = 0
+$$
+c) $\mathcal{R} = \{ x, y, x \times y\}$ reper pozitiv orientat în $\mathbb{R}^3$ (adică la fel orientat cu $\mathcal{R}_0$)
