@@ -238,38 +238,40 @@ $\exists \mathcal{R} = \{e_1, \dots, e_n \}$ reper în $V$ astfel încât $Q$ ar
 
 1) $Q = 0 \implies Q$ are formă canonică 
 2) $Q \neq 0 \implies G \neq O_n$```
-	- $g_{11} \neq 0$
-	- $g_{11} = 0, \exists i_0 \in \{2, \dots, n\} \text{ a.i. } g_{i_0i_0} \neq 0$ 
-	Aici eventual schimbăm indicii (schimbare de reper) astfel încât $g_{11} \neq 0$ 
-	- $g_{ii} = 0,\quad \forall i = \overline{1,n}$
-	$$
-	G \neq O_n ,\quad  \exists \;g_{ij} \neq 0, \;i \neq j
-	$$
-	Fie schimbarea de reper:
-	$$
-	\begin{cases}
-	y_i = x_i + x_j\\
-	y_j = x_i - x_j \\
-	y_k = x_k, \; \forall\,k\in\{1, \dots, n\} \setminus \{i, j\}
-	\end{cases}
-	\implies 
-	\begin{cases}
-	x_i = \frac{1}{2}(y_i + y_j)\\
-	x_j = \frac{1}{2}(y_i - y_j)\\
-	x_k = y_k, \; \forall\,k\in\{1, \dots, n\} \setminus \{i, j\}
-	
-	\end{cases}
-	$$
-	Deci, fiindcă există doar $0$ pe diagonală: 
-	$$
-	Q(x) = 2\sum_{i < j}g_{ij}x_ix_j
-	$$
-	Iar termenul, după schimbarea de reper, este:
-	$$
-	2g_{ij}x_iy_j = 2g_{ij}\frac{1}{4}(y_i^2 - y_j^2) = \frac{1}{2}g_{ij}y_i^2 - \frac{1}{2}g_{ij}y_h^2
-	$$
-	Deci se reduce la cazul b)
+- $g_{11} \neq 0$
+- $g_{11} = 0, \exists i_0 \in \{2, \dots, n\} \text{ a.i. } g_{i_0i_0} \neq 0$ 
+Aici eventual schimbăm indicii (schimbare de reper) astfel încât $g_{11} \neq 0$ 
+- $g_{ii} = 0,\quad \forall i = \overline{1,n}$
+$$
+G \neq O_n ,\quad  \exists \;g_{ij} \neq 0, \;i \neq j
+$$
+Fie schimbarea de reper:
+$$
+\begin{cases}
+y_i = x_i + x_j\\
+y_j = x_i - x_j \\
+y_k = x_k, \; \forall\,k\in\{1, \dots, n\} \setminus \{i, j\}
+\end{cases}
 
+\implies 
+
+\begin{cases}
+x_i = \frac{1}{2}(y_i + y_j)\\
+x_j = \frac{1}{2}(y_i - y_j)\\
+x_k = y_k, \; \forall\,k\in\{1, \dots, n\} \setminus \{i, j\}
+
+\end{cases}
+$$
+Deci, fiindcă există doar $0$ pe diagonală: 
+$$
+Q(x) = 2\sum_{i < j}g_{ij}x_ix_j
+$$
+Iar termenul, după schimbarea de reper, este:
+$$
+2g_{ij}x_iy_j = 2g_{ij}\frac{1}{4}(y_i^2 - y_j^2) = \frac{1}{2}g_{ij}y_i^2 - \frac{1}{2}g_{ij}y_h^2
+$$
+Deci se reduce la cazul b)
+	
 Așadar, putem considera $g_{11} \neq 0$
 
 Demonstrăm prin inducție după numărul coordonatelor lui $x$ care apar în $Q$ 
