@@ -277,4 +277,46 @@ $$
 *Demonstrație*
 
 Abordarea este inductivă. 
+$$
+f_1 \neq 0_V \quad \text{alegem} \quad e_1 = f_1
+$$
+Fie: 
+$$
+e_2 = f_2 + \alpha_{21}e_1
+$$
+Din condiția de ortogonalitate
+$$
+\begin{aligned}
+\langle e_1, e_2 \rangle = 0 &\implies \langle f_2 + \alpha_{21}e_1, e_1 \rangle = 0 \implies\\
+& \implies \langle f_2, e_1 \rangle + \alpha_{21}\langle e_1, e_1 \rangle = 0
+\end{aligned}
+$$
+De unde rezultă
+$$
+\alpha_{21} = - \frac{\langle f_2, e_1 \rangle}{\langle e_1, e_1 \rangle}
+$$
+Și
+$$
+e_2 = f_2 - \frac{\langle f_2, e_1 \rangle}{\langle e_1, e_1 \rangle}
+$$
+Deci $P_2$:
+$$
+\begin{cases}
+f_1 = e_1 \\
+f_2 = \frac{\langle f_2, e_1 \rangle}{\langle e_1, e_1 \rangle}e_1 + e_2
+\end{cases}
 
+\implies 
+
+\operatorname{Sp}\{f_1, f_2\} = \operatorname{Sp}\{e_1, e_2 \}
+$$
+Presupunem $P_{k-1}$ adevărat 
+$$
+\{e_1, \dots, e_{k-1} \} \quad \text{vectori ortogonali, si} \quad \operatorname{Sp}\{f_1, \dots, f_{k-1} \} = \operatorname{Sp}\{e_1, \dots, e_{k-1} \}
+$$
+
+Avem:
+$$
+e_k = f_k + \sum_{i = 1}^{k-1}\alpha_{ki}e_i
+$$
+Condiția de ortogonalitate: 
