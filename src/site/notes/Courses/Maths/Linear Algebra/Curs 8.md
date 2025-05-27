@@ -237,6 +237,95 @@ $\exists \mathcal{R} = \{e_1, \dots, e_n \}$ reper în $V$ astfel încât $Q$ ar
 ***Demonstrație***
 
 1) $Q = 0 \implies Q$ are formă canonică 
-2) $Q \neq 0 \implies G \neq O_n$
+2) $Q \neq 0 \implies G \neq O_n$```
 	- $g_{11} \neq 0$
 	- $g_{11} = 0, \exists i_0 \in \{2, \dots, n\} \text{ a.i. } g_{i_0i_0} \neq 0$ 
+	Aici eventual schimbăm indicii (schimbare de reper) astfel încât $g_{11} \neq 0$ 
+	- $g_{ii} = 0,\quad \forall i = \overline{1,n}$
+	$$
+	G \neq O_n ,\quad  \exists \;g_{ij} \neq 0, \;i \neq j
+	$$
+	Fie schimbarea de reper:
+	$$
+	\begin{cases}
+	y_i = x_i + x_j\\
+	y_j = x_i - x_j \\
+	y_k = x_k, \; \forall\,k\in\{1, \dots, n\} \setminus \{i, j\}
+	\end{cases}
+	\implies 
+	\begin{cases}
+	x_i = \frac{1}{2}(y_i + y_j)\\
+	x_j = \frac{1}{2}(y_i - y_j)\\
+	x_k = y_k, \; \forall\,k\in\{1, \dots, n\} \setminus \{i, j\}
+	
+	\end{cases}
+	$$
+	Deci, fiindcă există doar $0$ pe diagonală: 
+	$$
+	Q(x) = 2\sum_{i < j}g_{ij}x_ix_j
+	$$
+	Iar termenul, după schimbarea de reper, este:
+	$$
+	2g_{ij}x_iy_j = 2g_{ij}\frac{1}{4}(y_i^2 - y_j^2) = \frac{1}{2}g_{ij}y_i^2 - \frac{1}{2}g_{ij}y_h^2
+	$$
+	Deci se reduce la cazul b)
+
+Așadar, putem considera $g_{11} \neq 0$
+
+Demonstrăm prin inducție după numărul coordonatelor lui $x$ care apar în $Q$ 
+$$
+P_1: \qquad Q(x) = g_{11}x_1^2 \quad \text{  - forma canonica}
+$$
+Presupunem adevărat $P_{k-1}$: $Q$ formă pătratică care conține coordonatele $x_1, \dots, x_{k-1}$ $\implies$ $\exists$  un reper în $V$ astfel încât $Q$ are o formă canonică. 
+
+Demonstrăm $P_{k-1} \implies P_{k}$
+
+Fie $Q$ formă pătratică care conține coordonatele $x_1, \dots, x_{k}$. Demonstrăm că $\exists$ un reper în V astfel încât $Q$ are o formă canonică. 
+
+$$
+Q(x) = g_{11}x_1^2 + 2g_{12}x_1x_2 + \dots + 2g_{1k}x_1x_{k} + Q^{'}(x)
+$$
+Unde $Q^{'}(x)$ conține doar $x_2, \dots, x_k$ 
+$$
+Q(x) = \frac{1}{g_{11}}(x_1^2 + 2g_{11}g_{12}x_1x_2 + \dots + 2g_{11}g_{1k}x_1x_{k}) + Q^{'}(x)
+$$
+Care devine: 
+$$
+Q(x) = \frac{1}{g_{11}}(g_{11}x_1 + \dots +g_{1k}x_k)^2 + Q^{''}(x)
+$$
+Unde $Q^{''}(x)$ conține doar $x_2, \dots, x_k$ 
+
+Fie schimbarea de reper: 
+$$
+\begin{cases}
+y_1 = g_{11}x_1 + \dots +g_{1k}x_k\\
+y_i = x_i, \quad \forall \, i = \overline{1,n}
+
+\end{cases}
+$$
+Deci: 
+$$
+Q(x) = \frac{1}{g_{11}}y_1^2 + Q^{''}(x)
+$$
+Dar $Q^{''}(x)$ conține $k-1$ coordonate ale lui $x$. Aplicăm $P_{k-1}$: 
+$$
+\exists \; \text{ un reper} \subset V \text{ astfel incat } Q^{''}(x) = a_2z_2^2 + \dots a_kzk^2
+$$
+Not $y_1 = z_1$, $a_1 = \frac{1}{g_{11}}$ 
+
+Deci Q devine: 
+$$
+Q(x) = a_1z_1^2 + a_2z_2^2 + \dots a_kz_k^2
+$$
+$$
+\begin{cases}
+P_1 \\
+P_{k-1} \implies P_k
+\end{cases}
+\implies 
+P_n \quad \forall \,n \in \mathbb{N}
+$$
+Q.E.D
+
+>[!definition]
+
