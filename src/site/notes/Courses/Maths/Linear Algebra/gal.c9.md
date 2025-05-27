@@ -126,3 +126,154 @@ $$
 g_0(x\times y, x) = g_0(x\times y, y) = 0
 $$
 c) $\mathcal{R} = \{ x, y, x \times y\}$ reper pozitiv orientat în $\mathbb{R}^3$ (adică la fel orientat cu $\mathcal{R}_0$)
+
+***Observație***
+$\times$ este un *determinant formal*  -> format din vectori și scalari, întoarce vector.
+$$
+\begin{aligned}
+x \times y = 
+\begin{vmatrix}
+e_1 & e_2 & e_3\\
+x_1 & x_2 & x_3\\
+y_1 & y_2 & y_3
+\end{vmatrix}
+= &e_1
+\begin{vmatrix}
+x_2 & x_3\\
+y_2 & y_3
+\end{vmatrix}
+- e_2 
+\begin{vmatrix} 
+x_1 & x_3\\
+y_1 & y_3
+\end{vmatrix}
++ e_3
+\begin{vmatrix}
+x_1 & x_2\\
+y_1 & y_2
+\end{vmatrix}\\\\
+= e_1\Delta_1 - e_2\Delta_2 + e_3\Delta_3
+\end{aligned}
+$$
+
+Deci 
+$$
+x \times y = (\Delta_1, -\Delta_2, \Delta_3)
+$$
+>[!proof] Proprietăți 
+>- $x \times y = - y \times x$ 
+>- $(x\times y)\times z = g_0(x, z)y - g_0(y, z)x$
+>- Identitate Jacobi: $\sum_{x, y, z}^{cyc}(x\times y)z$
+
+## Produsul mixt 
+
+Fie $(\mathbb{R}^3, g_0)$ s.v.e.r cu struct. canonică și $x, y, z \in \mathbb{R}^3$ 
+$$
+\begin{aligned} 
+z \land x \land y \overset{\text{def.}}{=} g_0(z, x \times y) &=
+\begin{vmatrix}
+z_1 & z_2 & z_3\\
+x_1 & x_2 & x_3\\
+y_1 & y_2 & y_3
+\end{vmatrix} = \\\\
+&= \begin{vmatrix}
+x_1 & x_2 & x_3\\
+y_1 & y_2 & y_3\\
+z_1 & z_2 & z_3
+\end{vmatrix}
+= x \land y \land z
+\end{aligned}
+$$
+### Exemplu 
+Fie $(\mathbb{R}^3,g_0)$ s.v.e.r,  
+$\mu = (1, -1, 2)$,   $\nu = (0, 1, 3)$,   $\omega = (1, 1, 0)$.
+
+a) $\mu \times \nu$  
+b) $\omega \wedge \mu \wedge \nu$
+
+ *Soluție*
+a) Calculăm $\mu \times \nu$:
+
+$$
+\mu \times \nu = 
+\begin{vmatrix}
+e_1 & e_2 & e_3 \\
+1 & -1 & 2 \\
+0 & 1 & 3 \\
+\end{vmatrix} 
+= \left( \begin{vmatrix} -1 & 2 \\ 1 & 3 \end{vmatrix}, - \begin{vmatrix} 1 & 2 \\ 0 & 3 \end{vmatrix}, \begin{vmatrix} 1 & -1 \\ 0 & 1 \end{vmatrix} \right)
+= (-5, -3, 1)
+$$
+b) Calculăm $\omega \wedge \mu \wedge \nu = g_0(\omega, \mu \times \nu)$:
+
+$$
+g_0(\omega, \mu \times \nu) = -5 \cdot 1 - 3 \cdot 1 + 0 = -8
+$$
+*Observații*
+a) 
+$$
+g_0(\mu \times \nu, \mu) = 0
+$$
+deoarece
+$$
+(-5, -3, 1) \cdot (1, -1, 2) = -5 \cdot 1 + (-3)(-1) + 1 \cdot 2 = -5 + 3 + 2 = 0
+$$
+b)
+$$
+g_0(\mu \times \nu, \nu) = 0
+$$
+deoarece
+
+$$
+(-5, -3, 1) \cdot (0, 1, 3) = -5 \cdot 0 + (-3) \cdot 1 + 1 \cdot 3 = 0
+$$
+***Reper ortonormat***
+$$
+\mathcal{R} = \{ \mu, \nu, \mu \times \nu \}
+$$
+și
+$$
+\mathcal{R}_0 = \{ e_1, e_2, e_3 \} \xrightarrow{C} \mathcal{R} = \{ \mu, \nu, \mu \times \nu \}
+$$
+unde matricea de trecere $C$ este:
+
+$$
+C = 
+\begin{pmatrix}
+1 & 0 & -5 \\
+-1 & 1 & -3 \\
+2 & 3 & 1 \\
+\end{pmatrix}
+$$
+Calculul determinantului:
+$$
+\det C = 
+\begin{vmatrix}
+1 & 0 & -5 \\
+-1 & 1 & -3 \\
+2 & 3 & 1 \\
+\end{vmatrix} = 11 + 24 = 35
+$$**Norma vectorului $\mu \times \nu$**
+$$
+\|\mu \times \nu\| = \sqrt{g_0(\mu \times \nu, \mu \times \nu)} = \sqrt{25 + 9 + 1} = \sqrt{35}
+$$
+## Ortonormarea unui reper oarecare
+
+***Problemă***:
+
+$(V, g_0)$ s.v.e.r. $\mathcal{R} = \{e_1, \dots, e_n\}$ reper arbitrar. Există $\mathcal{R}'$ reper ortonormat? 
+
+### Procedeul Gram - Schmidt
+
+$(V, g_0)$ s.v.e.r. Cu produsul scalar canonic $g_0  = (\cdot, \cdot) = \langle \cdot, \cdot \rangle$  
+
+fie $\mathcal{R} = \{f_1, \dots, f_n \}$ reper arbitrat $\implies \exists  \, \mathcal{R}' = \{e_1, \dots, e_n \}$ reper ortogonal astfel încât
+$$
+\operatorname{Sp}\{e_1, \dots, e_n \} = \operatorname{Sp}\{f_1, \dots, f_n \}
+$$
+(Sp = spațiul generat de) 
+
+*Demonstrație*
+
+Abordarea este inductivă. 
+
