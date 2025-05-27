@@ -253,7 +253,7 @@ $$
 -1 & 1 & -3 \\
 2 & 3 & 1 \\
 \end{vmatrix} = 11 + 24 = 35
-$$**Norma vectorului $\mu \times \nu$**
+$$**Norma vectorului** $\mu \times \nu$
 $$
 \|\mu \times \nu\| = \sqrt{g_0(\mu \times \nu, \mu \times \nu)} = \sqrt{25 + 9 + 1} = \sqrt{35}
 $$
