@@ -48,7 +48,8 @@ g(e_i, e_j) \overset{\text{not.}}{=} g_{ij}
 $$
 Unde $G$ este matricea asociată lui $g$ în raport cu reperul $\mathcal{R}$. 
 
-Avem
+Rezultă
+###### Forma biliniară în funcție de coordonate și matricea asociată
 $$
 g(x, y) = g(\sum_{i=1}^nx_ie_i, \sum_{j=1}^ny_je_j) = \sum_{i, j = 1}^nx_iy_jg_{ij}
 $$
@@ -329,5 +330,228 @@ P_n \quad \forall \,n \in \mathbb{N}
 $$
 Q.E.D
 
->[!definition]
+>[!definition] Forma normală 
+>Fie $Q : V \to \mathbb{R}$ formă pătratică **reală**
+>Se numește ***forma normală a lui $Q$***:
+>$Q(x) = x_1^2 + \dots +x_p^2 - x_{p+1}^2 \dots -x_r^2$, unde $r = \operatorname{rg} Q$
 
+***Proprietate***
+
+Fie $Q : V \to \mathbb{R}$ formă pătratică **reală**. Atunci există reper în $V$ astfel încât $Q$ să aibă forma **normală**.
+
+*Demonstrație*
+
+Conform teoremei lui Gauss, există un reper în $V$ astfel încât $Q$ are o formă canonică
+$$
+Q(x) = a_1x_1 + \dots + a_rx_r^2
+$$
+
+Eventual renumerotând indicii (prin schimbare de reper), considerăm: 
+$$
+a_1, \dots, a_p > 0 \quad \text{si} \quad a_{p+1} \dots a_r < 0
+$$
+Fie schimbarea de reper 
+$$
+\begin{cases}
+y_i = \sqrt{a_i}x_i, \quad i = \overline{1, p}\\
+y_i = \sqrt{-a_i}x_i, \quad i = \overline{p+1, r}\\
+y_k = x_k, \quad k = \overline{r+1, n}
+\end{cases}
+\implies 
+Q(x) = y_1^2 + \dots + y_p^2 - y_{p+1}^2 - \dots - y_r^2
+$$
+
+Q.E.D.
+
+##### Teorema de inerție Sylvester 
+
+Fie $Q : V \to \mathbb{R}$ formă pătratică **reală**
+
+Numărul de $+$ și de $-$ din forma normală reprezintă ***invarianți*** la schimbarea de reper. 
+
+>[!notation]
+>$(i,j)$ - signatura, unde $i$ este numărul de $+$, iar $j$ este numărul de $-$ din $Q$
+
+***Observație***
+$Q$ este pozitiv definită $\iff$ $(n,0)$ - signatura (toate semnele din forma normală sunt $+$)
+
+Forma normală are aceeași signatură ca forma canonică. 
+
+##### Exercițiu 1 
+
+Fie $g: \mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}$ o formă biliniară și G matricea asociată în raport cu $\mathcal{R}_0$
+$$
+G = 
+\begin{pmatrix}
+1 & 1 & 0\\
+1 & 2 & -1\\
+0 & -1 & 0
+\end{pmatrix}
+$$
+a) $g$ 
+b) $Q : \mathbb{R}^3 \to \mathbb{R}$ formă pătratică. Să se aducă $Q$ la formă canonică/normală. Este $Q$ pozitiv definită? 
+
+*Soluție*
+a) Aplicăm [[Courses/Maths/Linear Algebra/Curs 8#Forma biliniară în funcție de coordonate și matricea asociată\|asta]] 
+$$
+g(x, y) = x_1y_1 + x_1y_2 + x_2y_1 + 2x_2y_2 -x_2y_3 -x_3y_y
+$$
+b) Din [[Courses/Maths/Linear Algebra/Curs 8#Forme pătratice\|definiție]]
+$$
+Q(x) = g(x,x) = \sum_{i=1}^3g_{ii}x_i^2 + 2\sum_{i<j}g_{ij}x_ix_j
+$$
+Deci 
+$$
+Q(x) = x_1^2 + 2x_2^2 + 2x_1x_2 -2 x_2x_3
+$$
+Aplicăm teorema Gauss, grupăm toți termenii care îl conțin pe $x_1$ 
+$$
+Q(x) = (x_1^2 + 2x_1x_2) + 2x_2^2 -2x_2x_3
+$$
+$$
+Q(x) = (x_1 + x_2)^2 + x_2^2 - 2x_3x_3 = (x_1 + x_2)^2 + (x_2 - x_3)^2 -x_3^2
+$$
+Fie schimbarea de reper:
+$$
+\begin{cases}
+y_1 = x_1 + x_2\\
+y_2 = x_2 - x_3\\
+y_3 = x_3
+\end{cases}
+$$
+În noul reper: 
+$$
+Q(x) = y_1^2 + y_2^2-y_3^2
+$$
+Signatura este $(2, 1)$, deci forma pătratică nu este pozitiv definită. 
+
+##### Exercițiul 2 
+Fie $g: \mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}$ o formă biliniară
+$$
+g(x,y) = x_2y_1 + x_1y_2 + 2x_3y_1 + 2x_1y_3
+$$
+a) $G$ matricea asociată lui $g$ în raport cu $\mathcal{R}_0$
+b) $Q : \mathbb{R}^3 \to \mathbb{R}$ forma pătratică. Să se aducă $Q$ la formă canonică/pătratică. Este $Q$ pozitiv definită? 
+
+*Soluție*
+
+$$
+g(x,y) = \sum_{i,j = 1}^3g_{ij}x_iy_j
+$$
+Deci matricea $G = (g_{ij})$ este:
+$$
+G = \begin{pmatrix} 
+0 & 1 & 2\\
+1 & 0 & 0 \\
+2 & 0 & 0
+\end{pmatrix}
+$$
+b) $Q(x) = g(x,x) = 2x_1x_2 + 4 x_1x_3$ 
+
+*cazul 3 din demonstrația teoremei lui Gauss, când diagonala principală e 0*
+
+Fie schimbarea de reper
+$$
+\begin{cases}
+y_1 = x_1 + x_2\\
+y_2 = x_1 - x_2\\
+y_3 = x_3
+\end{cases} 
+\implies 
+\begin{cases}
+x_1 = \frac{1}{2}(y_1 + y_2) \\
+x_2 = \frac{1}{2}(y_1 - y_2)\\
+x_3 = y_3
+\end{cases}
+$$
+$$
+Q(x) = \frac{1}{2}(y_1^2-y_2^2) + 2y_1y_3 + 2y_2y_3
+$$
+Aplicând metoda Gauss și grupând termenii ce îl conțin pe $y_1$
+$$
+\begin{aligned}
+Q(x) &= \frac{1}{2}(y_1^2 + 4y_1y_3) - \frac{1}{2}y_2^2 + 2y_2y_3\\
+&= \frac{1}{2}(y_1 + 2y_3)^2 - 2y_3^2 - \frac{1}{2}y_2^2 + 2y_2y_3\\
+&= \frac{1}{2}(y_1 + 2y_3)^2 - \frac{1}{2}(y_2 -2y_3)^2
+\end{aligned}
+$$
+Fie schimbarea de reper:
+$$
+\begin{cases}
+z_1 = \frac{1}{\sqrt{2}}(y_1 + 2y_3)\\
+z_2 = \frac{1}{\sqrt{2}}(y_2 - 2y_3)\\
+z_3 = y_3
+\end{cases}
+$$
+În noul reper, $Q$ devine:
+$$
+Q(x)= z_1^2 - z_2^2
+$$
+Signatura este $(1, 1)$ $\implies$ nu este pozitiv definită. 
+
+##### Metoda Jacobi 
+
+Fie $Q : V \to \mathbb{R}$ formă pătratică **reală**
+
+Fie $\mathcal{R} = \{e_1, \dots, e_n\}$ reper în $V$ astfel încât matricea $G$ verifică
+$$
+\begin{aligned}
+& \Delta_1 = 
+
+\begin{vmatrix}
+g_{11}
+\end{vmatrix}\\
+
+&\Delta_2 = 
+\begin{vmatrix}
+g_{11} & g_{12}\\
+g_{21} & g_{22}
+\end{vmatrix}\\
+&\vdots\\
+&\Delta_n = \operatorname{det}G
+\end{aligned}
+$$
+Cu proprietatea că $\Delta_i \neq 0, \quad i = \overline{1,n}$ 
+
+Atunci $\exists\, \mathcal{R'}$ un reper în $V$ astfel încât 
+$$
+Q(x) = \frac{1}{\Delta_1}x_1'^{2} + \frac{\Delta_1}{\Delta_2}x_2'^2 + \dots + \frac{\Delta_{n-1}}{\Delta_n}x_n'^2
+$$
+Mai mult, dacă $\Delta_i > 0, \quad \forall \, i = \overline{1,n}$, atunci $Q$ este pozitiv definită
+
+>[!note]
+>- Metoda Jacobi este restrictivă
+>- Metoda Gauss poate fi aplicată oricând
+
+##### Exercițiul 2 - cu metoda Jacobi
+$$
+G = 
+\begin{pmatrix}
+1 & 1 & 0\\
+1 & 2 & -1\\
+0 & -1 & 0
+\end{pmatrix}
+$$
+Deci, scriind minorii: 
+$$
+\begin{aligned}
+&\Delta_1 = 1 \neq 0\\ 
+&\Delta_2 = 
+\begin{vmatrix}
+1 & 1\\
+1 & 2
+\end{vmatrix}
+= 2 - 1 = 1 \neq 0\\
+&\Delta_3 = (-1)(-1)^{2+3}
+\begin{vmatrix}
+1 & 1\\
+0 & -1
+\end{vmatrix}
+= -1 \neq 0
+\end{aligned}
+$$
+Se poate aplica metoda Jacobi. Deci, există un reper astfel încât
+$$
+Q(x) = \frac{1}{\Delta_1} x_1'^2 + \frac{\Delta_1}{\Delta_2}x_2'^2 + \frac{\Delta_2}{\Delta_3} x_3'^2 = x_1'^2 + x_2'^2 - x_3'^2
+$$
+Signatura este $(2,1)$, deci nu este pozitiv definită.
