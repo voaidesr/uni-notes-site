@@ -237,7 +237,7 @@ $\exists \mathcal{R} = \{e_1, \dots, e_n \}$ reper în $V$ astfel încât $Q$ ar
 ***Demonstrație***
 
 1) $Q = 0 \implies Q$ are formă canonică 
-2) $Q \neq 0 \implies G \neq O_n$```
+2) $Q \neq 0 \implies G \neq O_n$
 - $g_{11} \neq 0$
 - $g_{11} = 0, \exists i_0 \in \{2, \dots, n\} \text{ a.i. } g_{i_0i_0} \neq 0$ 
 Aici eventual schimbăm indicii (schimbare de reper) astfel încât $g_{11} \neq 0$ 
