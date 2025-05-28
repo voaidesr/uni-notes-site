@@ -502,6 +502,23 @@ $$
 $$
 $$
 U = \left\{(x_1, x_1 + x_3, x_3) \, | \, x_1, x_3 \in \mathbb{R} \right\} = \langle \{
-\underbrace{(1, 1, 0)}_{f_1}, 
-\underbrace{(0, 1, 1)}_{f_2} \} \rangle
+\underbrace{(1, 1, 0)}_{f_2}, 
+\underbrace{(0, 1, 1)}_{f_3} \} \rangle
 $$
+Aplicăm G-S
+$$
+\begin{aligned}
+&e_2 = f_2 = (1, 1, 0) \qquad \frac{e_2}{\|e_2\|} = \frac{1}{\sqrt{2}}(1, 1, 0)\\\\
+&e_3 = f_3 - \frac{ 
+\langle f_3, e_2 \rangle
+}{
+\langle e_2, e_2 \rangle
+}e_2 = \frac{1}{2}(-1, 1, 2) \qquad \frac{e_3}{\|e_3\|} = \frac{1}{\sqrt{6}}(-1, 1, 2)
+\end{aligned}
+$$
+Avem reper ortonormat în $U$
+$$
+\mathcal{R}_2 = \left\{\frac{1}{\sqrt{2}}(1, 1, 0), \frac{1}{\sqrt{6}}(-1, 1, 2) \right\}
+$$
+***Observație***
+$v = \alpha u, \quad \alpha > 0 \qquad \frac{v}{\|v\|} = \frac{u}{\|u\|}$ 
