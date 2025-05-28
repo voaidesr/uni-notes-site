@@ -363,6 +363,8 @@ A^{-1} =
 0 & 0 & \cdots & 1
 \end{pmatrix}
 $$
+$A$ este matricea de trecere. $\operatorname{det} A^{-1} = 1$ 
+
 Avem $\mathcal{R}' = \{e_1, \dots, e_n \}$ sistem de vectori ortogonali (doi câte doi). Este și sistem de generatori. 
 $$
 |\mathcal{R}'| = n = \operatorname{dim} V \implies \mathcal{R'} \quad\text{reper ortogonal}
@@ -383,4 +385,123 @@ $v \neq 0_v$, atunci $\frac{v}{\|v\|}$ este versor.
 $$
 g(\frac{v}{\|v\|},\frac{v}{\|v\|}) = \frac{1}{\|v\|^2}g(v,v) = \frac{\|v\|^2}{\|v\|^2} = 1
 $$
+## Complement ortogonal 
 
+$(V, g)$ s.v.e.r.,    $x\in V \setminus \{ 0_V \}$,    $U\subseteq V$ subspațiu vectorial.
+
+1. $x^{\perp} = \{y \in V \, | \, g(x,y) = 0 \} \subseteq V$ subspațiu vectorial (toți vectorii perpendiculari pe x = complementul ortogonal al lui x)
+2. $U^{\perp} = \{y \in V \, | \, g(x, y) = 0 \; \forall x \in U\} \subseteq V$ subspațiu vectorial
+
+Proprietate: 
+
+Pentru $U \subseteq V$ subspațiu vectorial $\exists_{!} \; U^{\perp} \subseteq V$ subspațiu vectorial (complement ortogonal) astfel încât: 
+$$
+V = U \oplus U^{\perp}
+$$
+*Demonstrație*
+1. $\subseteq$
+Din definiție: 
+$$
+U + U^{\perp} \subseteq V \implies U \oplus U^{\perp} \subseteq V 
+$$
+Demonstrăm $\oplus$ 
+
+Fie $x \in U \cap U^{\perp} \implies g(x,x) = 0 \implies x = 0_V$ 
+
+2. $\supseteq$ 
+Demonstrăm că $V \subseteq U \oplus U^{\perp}$ 
+Fie $v \in V$ și $\mathcal{R} = \{e_1, \dots, e_k\}$ un reper ortonormat în $U$. 
+Fie 
+$$
+v' = v - \underbrace{ 
+\sum_{i=1}^k \langle v, e_i \rangle e_i
+}_{\text{not. } v''\;\in \;U}
+$$
+Demonstrăm că $v' \in U_{\perp}$ 
+$$
+\begin{aligned}
+&\langle v',e_1\rangle = \langle v, e_1\rangle - 
+\underbrace{
+\sum_{i=1}^k\langle v, e_i \rangle \underbrace{\langle e_i, e_1 \rangle}_{\delta_{1i}}
+}_{\langle v_, e_1 \rangle} = 0\\
+
+&\vdots\\
+
+&
+\langle v',e_k\rangle = \langle v, e_k\rangle - 
+\underbrace{
+\sum_{i=1}^k\langle v, e_i \rangle \underbrace{\langle e_i, e_k \rangle}_{\delta_{ki}}
+}_{\langle v, e_k \rangle} = 0
+\end{aligned}
+$$Deci $v' \in U^{\perp}$ 
+Și $v$ se poate descompune: 
+$$
+v = \underset{\in \;U}{u''} + \underset{\in \; U^{\perp}}{u'}
+$$
+Așadar, din 1, 2 $\implies$ $V = U \oplus U^{\perp}$ 
+
+## Exercițiu 1 
+
+$(\mathbb{R}^3, g_0)$ s.v.e.r, $u = (1, 2, -1)$ $\implies$ $\|u\| = \sqrt{6}$ 
+
+a) $u^{\perp}$
+b) determinați un reper ortonormat în $u^{\perp}$ 
+
+*Soluție*
+a) 
+$$
+\begin{aligned}
+u^{\perp} = \{x \in \mathbb{R}^3 \, | \,
+\underbrace{
+g_0(x,u)
+}_{x_1 + 2x_2 -x_3} = 0 
+\} &= \{(x_1, x_2, x_1 + 2x_2) \, | \, x_1, x_2 \in \mathbb{R}\} = \\
+& = \{x_1\underbrace{(1, 0, 1)}_{f_1} + x_2\underbrace{(0, 1, 2)}_{f_2}\, | \, x_1, x_2 \in \mathbb{R} \} = \\
+& = \langle \{f_1, f_2 \} \rangle
+\end{aligned}
+$$
+Deci $\operatorname{dim} u^{\perp} = 3 - 1 = 2$ 
+$\mathcal{R} = \{f_1, f_2 \}$ reper oarecare în $u^{\perp}$.  Trebuie ortonormat, deci aplicăm G-S. 
+$$
+\begin{aligned}
+& e_1 = f_1 = (1, 0, 1) \qquad \|e_1\| = \sqrt{2}\\\\
+& e_2 = f_2 - \frac{\langle f_2, e_1 \rangle}{\langle e_1, e_1 \rangle}e_1 = (0, 1, 2) - \frac{2}{2}(1, 0, 1) = (-1, 1, 1) \qquad \|e_2\| = \sqrt{3}
+\end{aligned}
+$$
+Noile repere: 
+$$
+\mathcal{R}' = \{e_1, e_2 \} \quad \text{ortogonal} \implies 
+\mathcal{R}'' = \{\frac{1}{\sqrt{2}}(1,0,1), \frac{1}{\sqrt{3}}(-1, 1, 1) \} \;
+\;\;\text{ortonormal}
+$$
+Avem: 
+$$
+\mathbb{R}^3 = u \oplus u^{\perp}
+$$
+Deci avem următorul reper ortonormat în $\mathbb{R}^3$
+$$
+\mathcal{R} = \{\frac{1}{\sqrt{6}}(1, 2, -1),\frac{1}{\sqrt{2}}(1,0,1), \frac{1}{\sqrt{3}}(-1, 1, 1) \}
+$$
+## Exercițiu 2 
+
+$(\mathbb{R}^3, g_0)$ s.v.e.r 
+
+$U = \{x \in \mathbb{R}^3 \, | \, x_1 - x_2 + x_3 = 0 \} \implies x_2 = x_1 + x_3$ 
+
+a) $U^{\perp}$
+b) Să se determine $\mathcal{R} = \underbrace{\mathcal{R}_1}_{\text{reper } U^{\perp}} \cup \underbrace{\mathcal{R}_2}_{\text{reper } U}$ reper ortonormat în $\mathbb{R}^3$. 
+*Soluție*
+
+a) Dacă luăm coeficienții ecuației planului descris în $U$, obținem. [[Courses/Maths/Linear Algebra/gal.c11\|vezi cursul de geometrie analitica]]
+$$
+U^{\perp} = \langle \{(1, -1, 1) \} \rangle
+$$
+Avem reper ortonormat în $U^{\perp}$
+$$
+\mathcal{R}_1 = \left\{ \frac{e_1}{\|e_1\|} = \frac{1}{\sqrt{3}}(1, -1, 1) \right\}
+$$
+$$
+U = \left\{(x_1, x_1 + x_3, x_3) \, | \, x_1, x_3 \in \mathbb{R} \right\} = \langle \{
+\underbrace{(1, 1, 0)}_{f_1}, 
+\underbrace{(0, 1, 1)}_{f_2} \} \rangle
+$$
