@@ -418,6 +418,7 @@ v' = v - \underbrace{
 }_{\text{not. } v''\;\in \;U}
 $$
 Demonstrăm că $v' \in U_{\perp}$ 
+
 $$
 \begin{aligned}
 &\langle v',e_1\rangle = \langle v, e_1\rangle - 
@@ -433,7 +434,9 @@ $$
 \sum_{i=1}^k\langle v, e_i \rangle \underbrace{\langle e_i, e_k \rangle}_{\delta_{ki}}
 }_{\langle v, e_k \rangle} = 0
 \end{aligned}
-$$Deci $v' \in U^{\perp}$ 
+$$
+Deci $v' \in U^{\perp}$ 
+
 Și $v$ se poate descompune: 
 $$
 v = \underset{\in \;U}{u''} + \underset{\in \; U^{\perp}}{u'}
