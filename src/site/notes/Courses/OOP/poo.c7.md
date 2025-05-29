@@ -144,7 +144,7 @@ Instrument* Violin::clone() const
 }
 ```
 
-Deci `Orchestra` permite copiere:
+Deci `Orchestrnevirtualăa` permite copiere:
 
 ```cpp
 Orchestra::Orchestra(const Orchestra& other)
@@ -207,3 +207,246 @@ Ideea fundamentală de gestionare a resurselor în C++ e că resursele ar trebui
 Nu există garbage collection, RAII este suficient. 
 
 Exemplu de RAII: [[Courses/OOP/smart_pointers\|smart pointers]]
+
+Dezavantaj smart pointers: nu putem folosi tipuri de date **covariante**.
+
+### Tipuri de date covariante 
+
+- Într-o clasă de bază, o funcție virtuală poate avea un anumit tip de returnare, de exemplu `Baza*`
+- În clasa derivată, când suprascrii acea funcție, poți să returnezi un pointer la o clasă derivată din `Baza` (ex: `Derivata1*`), adică un tip **mai specific**
+- Aceasta este o caracteristică a C++ numită **covarianță a tipurilor de returnare**
+
+```cpp
+class Baza {
+public:
+    virtual ~Baza() = default;
+    virtual Baza* clone() const = 0; // funcție virtuală pură
+};
+
+class Derivata1 : public Baza {
+public:
+// tip covariant (Derivata1* în loc de Baza*)
+    Derivata1* clone() const override {
+        return new Derivata1(*this);
+    }
+    void f() { std::cout << "f der1\n"; }
+};
+
+class Derivata2 : public Baza {
+public:
+    Derivata2* clone() const override {  // tip covariant
+        return new Derivata2(*this);
+    }
+    void g() { std::cout << "g der2\n"; }
+};
+
+int main() {
+    Baza* b1 = new Derivata1;
+    // Derivata1* d1 = b1->clone();  // eroare -> nu este cast explicit
+    // chiar daca prin virtual ar apela functia buna, virtual nu poate schimba tipul static al b1->clone(), care, in baza, este Base*
+    // b1->f();  // eroare
+    delete b1;
+    Baza* b2 = new Derivata2;
+    Derivata2 d2;
+    // Derivata2* d2_1 = b2->clone();  // eroare
+    Derivata2* d2_2 = d2.clone();  // ok
+    d2_2->g();  // ok
+    delete b2;
+    delete d2_2;
+}
+```
+
+### Interfață non-virtuală (NVI) 
+
+Toate clasele derivate au o implementare comună și trebuie să suprascrie doar anumite porțiuni. 
+- clasa de bază oferă funcții publice non-virtuale care implementează *interfața*
+- aceste funcții invocă alte funcții (usually private sau protected)
+- aceste funcții sunt particularizate în clasele derivate (sunt suprascrise) 
+
+```cpp
+class Base {
+public:
+    // NVI
+    void process() { // nevirtuala
+	    preProcess()
+        doProcess();
+    }
+
+protected:
+    virtual void doProcess() = 0;  // customization point
+
+private:
+    void preProcess() {
+        // setup code 
+    }
+};
+
+class Derived1 : public Base {
+protected:
+    void doProcess() override {
+        // customized behavior here 
+    }
+};
+
+class Derived2 : public Base {
+protected:
+    void doProcess() override {
+        // customized behavior here
+    }
+};
+```
+
+Prin această implementare este mult mai ușor să modificăm structura implementării la nivelul întregii ierarhii.
+
+NVI asigură ca apelul se face doar prin funcția publică ne-virtuală -> clasele derivate nu pot evita implementarea comună dată de clasa de bază. 
+
+- D - din SOLID
+
+### Tratarea excepțiilor în C++ 
+
+- Mecanisme de tratare a erorilor:
+	- coduri de eroare 
+	- aserțiuni 
+	- excepții
+	- tipul de date rezultat 
+
+Excepțiile (în C++) pot fi cauzate de:
+- în mod implicit de limbaj (*alocare dinamică*) și de funcțiile din `stdlib` (*argumente invalide, erori de conversie*) 
+- în mod explicit de noi 
+
+Sintaxă: 
+- în bloc `try/catch` prindem excepții aruncate cu  `throw` 
+- în fiecare clauză se tratează un anumit tip de eroare
+
+```cpp
+try {
+// try block
+} catch (type1 arg) {
+// catch 1
+} catch (type2 arg) {
+// catch 2
+} 
+...
+catch(typeN arg) {
+// catch N 
+}
+```
+
+>[!important] 
+>Tipul argumentului din `catch` arată care bloc este executat.
+
+Dacă nu este generată excepție $\implies$ nu se execută bloc `catch`. 
+
+Instrucțiunile `catch` sunt verificate în ordine, fiind executat primul de tipul erorii.
+
+*Observații*
+- `throw` fără `try` $\implies$ eroare
+- nu există `catch` care să fie asociat (prin tip) cu `throw`, programul se termină prin `terminate`
+- `.terminate()` poate să fie redefinită să facă altceva 
+
+```cpp
+void customTerminate() {
+    std::cerr << "Custom terminate handler calleds\n";
+    std::abort(); 
+}
+
+int main() {
+    std::set_terminate(customTerminate);
+
+    throw 42;  // No catch, triggers terminate()
+    return 0;
+}
+```
+
+- nu se recomandă folosirea excepțiilor dacă locul unde are loc eroarea este foarte apropiat `catch`-ul asociat
+
+#### Excepții standard 
+
+Toate se moștenesc din `std::exception`.
+
+Multe din ele sunt în `<exception>` sau `<stdexcept>`.
+
+```cpp
+try {
+        // Code that may throw
+    }
+    catch (const std::exception& e) {  // Catch any standard exception
+        std::cerr << "Caught exception: " << e.what() << std::endl;
+    }
+```
+
+Unde `.what()` întoarce un `string` care detaliază eroarea. 
+
+#### Aruncarea erorilor din clase de bază/derivate
+
+>[!important]
+>Un `catch` pentru tipul de bază va fi executat și pentru un obiect din tipul derivat. 
+
+Deci, `catch`-ul din tipul derivat trebuie pus primul și apoi `catch`-ul de bază. 
+
+```cpp
+class B{};
+class D : public B {};
+
+int main()
+{
+	D derived;
+	try {
+		throw derived;
+	} catch (const B& b) {
+		cout << "caught base" << endl;
+	} catch (const D& d) {
+		cout << "caught derived" << endl;
+	} // va afisa caught base
+}
+```
+
+*Când să aruncăm excepții?*
+
+- în constructori și funcții care creează obiecte în care rezultatul ar putea fi invalid 
+	- previne construirea unui obiect invalid 
+	- execuția sare la primul `catch` care se potrivește 
+- atunci când alternativa cu coduri de eroare e mai complicată 
+- atunci când codul e mai clar de înțeles cu excepții 
+	- separare clară între happy path și bad path
+
+*Ce punem în catch*?
+- prindem excepțiile prin referință (chiar cu `const` dacă nu le modificăm)
+- încercăm să găsim echilibru între erori generale și specifice 
+
+>[!proof] C++ specific
+>C++ permite definirea unei ierarhii de erori de la zero
+
+- nu e recomandat
+	- comun e să derivezi din `std::runtime_error` și `std::logic_error`
+	- se poate și din `std::exception` dar mai puțin convenient (nu există constructor cu mesaj de eroare) 
+
+```cpp
+class MyCustomError : public std::runtime_error {
+public:
+    explicit MyCustomError(const std::string& message)
+        : std::runtime_error(message) {}
+};
+```
+
+Observații:
+- `noexcept` specifier:
+  - Se poate specifica dacă o funcție aruncă excepții sau nu.
+  - Exemple:
+
+    ```cpp
+    void Xhandler1(int test) noexcept;
+    void Xhandler2(int test) noexcept(false);
+    ```
+    
+  - `noexcept` înseamnă că funcția **nu aruncă excepții**.
+  - `noexcept(false)` înseamnă că funcția **poate arunca excepții**.
+
+- Re-aruncarea unei excepții:
+  - Se face cu `throw;` fără a specifica obiectul excepției.
+  - Util pentru handleri care tratează erori comune, dar doresc să trimită excepția mai sus în lanț.
+
+- Atenție la `throw err;`:
+  - Creează o copie prin valoare a obiectului excepției.
+  - Poate cauza **object slicing**, pierzând comportamentul polimorfic.
+  - Pentru a păstra polimorfismul, folosește `throw;` fără argumente pentru re-aruncare.
