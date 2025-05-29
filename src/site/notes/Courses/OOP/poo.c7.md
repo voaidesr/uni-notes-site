@@ -206,4 +206,4 @@ Ideea fundamentală de gestionare a resurselor în C++ e că resursele ar trebui
 
 Nu există garbage collection, RAII este suficient. 
 
-Exemplu de RAII: *smart pointers*.
+Exemplu de RAII: [[Courses/OOP/smart_pointers\|smart pointers]]
