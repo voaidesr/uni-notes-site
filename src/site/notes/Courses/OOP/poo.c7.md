@@ -113,10 +113,9 @@ Orchestra& operator=(const Orchestra&) = delete;
 Allow move operations
 
 ```cpp
-Orchestra(OrchestrOrchestra(Orchestra&&) = default;
-Orchestra& operator=(Orchestra&&) = default;
-a&&) = default;
-Orchestra& operator=(Orchestra&&) = default;
+Orchestra& operator=(const Orchestra& other) = delete;
+Orchestra(Orchestra&& other) = default;
+Orchestra& operator=(Orchestra&& other) = default;
 ```
 
 ***Soluție 2***
