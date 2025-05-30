@@ -11,6 +11,12 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 	- [[Courses/OOP/poo.c4\|Curs 4]]
 	- [[Courses/OOP/poo.c5\|Curs 5]]
 	- [[Courses/OOP/poo.c6\|Curs 6]]
+	- [[Courses/OOP/poo.c7\|Curs 7]]
+	- [[Courses/OOP/poo.c8\|Curs 8]]
+	- [[Courses/OOP/poo.c9\|Curs 9]]
+	- [[Courses/OOP/poo.c10\|Curs 10]]
+	- [[poo.c11\|Curs 11]]
+	- [[poo.c12\|Curs 12]]
 2. **Structuri de Date** 
 3. **Baze de date**
 4. **Limbaje formale și automate**
