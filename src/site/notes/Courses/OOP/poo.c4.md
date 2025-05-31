@@ -120,10 +120,7 @@ int main() {
 - pot fi definite clase în clase/clase în funcții
 -  `class` este o declarație (definește un scope) 
 
-#### Nested clasFie limbajele L1, L2, L3, L4 cu proprietatea c˘a L1 · L2 = L3 · L4 ¸si L1, L2, L3 ∈
-REG. Avem a¸sadar c˘a L4 ∈ REG. Unde REG este familia limbajelor regulate (recunoscute de
-expresii regulate). A · B este concatenarea a dou˘a limbaje.
-Afirmat¸ia este ADEVARATA/FALS ˘ A (ˆıncercuit¸i varianta corect˘a ¸si apoi justificat¸i r˘aspunsul)ses (clase imbricate) 
+#### Nested classes (clase imbricate) 
 ```cpp
 class X {
 public:
