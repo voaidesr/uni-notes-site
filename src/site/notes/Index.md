@@ -4,7 +4,7 @@
 
 Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I, semestrul II. 
 
->[!proof]- 1.Programare Orientata pe Obiecte 	
+>[!proof]- 1. Programare Orientata pe Obiecte 	
 >- [[Courses/OOP/poo.c1\|Curs 1]]
 >- [[Courses/OOP/poo.c2\|Curs 2]]
 >- [[Courses/OOP/poo.c3\|Curs 3]]
@@ -18,20 +18,20 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 >- [[poo.c11\|Curs 11]]
 >- [[poo.c12\|Curs 12]]
 
->[!proof]- 2.Structuri de Date
+>[!proof]- 2. Structuri de Date
 
->[!proof]- Baze de Date
+>[!proof]- 3. Baze de Date
 >>[!hint]- Laboratoare
 >>- [[Courses/DB/bd.l1\|Lab 1]]
 >
 >>[!hint]- Cursuri
 
->[!proof]- Limbaje Formale și Automate
+>[!proof]- 4. Limbaje Formale și Automate
 
->[!proof]- Geometrie și Algebră liniară
+>[!proof]- 5. Geometrie și Algebră liniară
 >- [[Courses/Maths/Linear Algebra/gal.c7\|Curs 7]]
 >- [[Courses/Maths/Linear Algebra/gal.c8\|Curs 8]]
 >- [[Courses/Maths/Linear Algebra/gal.c9\|Curs 9]]
 
->[!proof]- Logică Matematică și computațională
+>[!proof]- 6. Logică Matematică și computațională
 
