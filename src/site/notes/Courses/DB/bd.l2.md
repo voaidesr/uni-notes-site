@@ -51,11 +51,23 @@ Există două tipuri conversie:
 ### Funcții pentru prelucrarea caracterelor 
 
 
-| Funcție                   | Descriere                                                                                                      | Exemplu                                |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `LENGTH(STR)`             | lungimea unui string                                                                                           | `LENGTH('Informatica') = 11`           |
-| `SUBSTR(str, start [,n])` | subșirul unui string care începe la poziția start și are lungime n (opțional). `n` neprecizat -> până la final | `SUBSTR('Informatica', 1, 4) = 'Info'` |
-| `LTRIM(str [,chars])`     |                                                                                                                |                                        |
+| Funcție                                           | Descriere                                                                                                          | Exemplu                                                                                    |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `LENGTH(STR)`                                     | lungimea unui string                                                                                               | `LENGTH('Informatica') = 11`                                                               |
+| `SUBSTR(str, start [,n])`                         | subșirul unui string care începe la poziția start și are lungime n (opțional). `n` neprecizat -> până la final     | `SUBSTR('Informatica', 1, 4) = 'Info'`                                                     |
+| `LTRIM(str [,chars])`                             | șterge din stânga unui string orice caracter care apare în `chars`. Implicit, se șterg spațiile libere.            | `LTRIM('    ab') = 'ab'`<br><br>`LTRIM('aabea', 'ab') = 'ea'`                              |
+| `RTRIM(str [,chars])`                             | la fel, dar pe dreapta                                                                                             | -                                                                                          |
+| `TRIM(TRAILING\LEADING\BOTH chars FROM expresie)` | elimină caracterele `chars` de la început/final/ambele dintr-un șir.                                               | `TRIM(BOTH 'a' FROM 'abXa') = 'bX')`                                                       |
+| `LPAD(str, length [, chars]`                      | adaugă `chars` la stânga șirului până când lungimea ***noului șir*** devine `lenght`                               | `LPAD('info', 6) = '  info'`                                                               |
+| `RPAD(str, length [, chars]`                      | la fel, pe dreapta                                                                                                 | -                                                                                          |
+| `REPLACE(str1, str2 [, str3])`                    | întoarce `str1` cu toate aparițiile lui `str2` înlocuite cu `str3`. (Implicit se șterg)                            | `REPLACE('b$bb$$', '$', 'a') = 'babbaa')`                                                  |
+| `UPPER(str)`                                      | transformă toate literele în majuscule                                                                             | `UPPER('aBna') = 'ABNA'`                                                                   |
+| `LOWER(str)`                                      | transformă toate literele în minuscule                                                                             | -                                                                                          |
+| `INSTR(str, substr [, start [, n]])`              | caută într-un string, de la `start` a n-a apariție a unui substring.                                               | `INSTR('abcab', 'ab', 1, 2) = '4'`                                                         |
+| `ASCII(char)`                                     | codul ASCII al primului caracter al unui șir.                                                                      | `ASCII('abc') = ASCII('a') = 97`                                                           |
+| `CHR(n)`                                          | caracterul corespunzător codului ASCII specificat.                                                                 | `CHR(97) = 'a'`                                                                            |
+| `CONCAT(str1, str2)`                              | concatenează două șiruri de caractere                                                                              | `CONCAT('ab', 'cd') = 'abcd'`                                                              |
+| `TRANSLATE(str, src, dest)`                       | fiecare caracter care apare în string-urile `str` și `src` este transformat în caracterul corespunzător din `dest` | `TRANSLATE('$a$aa', '$', 'b') = 'babaa'`<br><br>`TRANSLATE('$a$aa', '$a', 'bc') = 'bcbcc'` |
 
 
 
