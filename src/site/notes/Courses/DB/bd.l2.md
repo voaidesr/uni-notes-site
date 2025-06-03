@@ -50,6 +50,7 @@ Există două tipuri conversie:
 
 ### Funcții pentru prelucrarea caracterelor 
 
+Vezi [[Courses/DB/bd.l2#Exerciții funcții pe șiruri de caractere\|exerciții]].
 
 | Funcție                                           | Descriere                                                                                                          | Exemplu                                                                                    |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
@@ -63,6 +64,7 @@ Există două tipuri conversie:
 | `REPLACE(str1, str2 [, str3])`                    | întoarce `str1` cu toate aparițiile lui `str2` înlocuite cu `str3`. (Implicit se șterg)                            | `REPLACE('b$bb$$', '$', 'a') = 'babbaa')`                                                  |
 | `UPPER(str)`                                      | transformă toate literele în majuscule                                                                             | `UPPER('aBna') = 'ABNA'`                                                                   |
 | `LOWER(str)`                                      | transformă toate literele în minuscule                                                                             | -                                                                                          |
+| `INITCAP(str)`                                    | prima litera majusculă, următoarele minuscule                                                                      | `INITCAP('aiE') = 'Aie' `                                                                  |
 | `INSTR(str, substr [, start [, n]])`              | caută într-un string, de la `start` a n-a apariție a unui substring.                                               | `INSTR('abcab', 'ab', 1, 2) = '4'`                                                         |
 | `ASCII(char)`                                     | codul ASCII al primului caracter al unui șir.                                                                      | `ASCII('abc') = ASCII('a') = 97`                                                           |
 | `CHR(n)`                                          | caracterul corespunzător codului ASCII specificat.                                                                 | `CHR(97) = 'a'`                                                                            |
@@ -70,6 +72,8 @@ Există două tipuri conversie:
 | `TRANSLATE(str, src, dest)`                       | fiecare caracter care apare în string-urile `str` și `src` este transformat în caracterul corespunzător din `dest` | `TRANSLATE('$a$aa', '$', 'b') = 'babaa'`<br><br>`TRANSLATE('$a$aa', '$a', 'bc') = 'bcbcc'` |
 
 ### Funcții aritmetice
+
+Vezi [[Courses/DB/bd.l2#Exerciții cu funcții aritmetice\|exerciții]].
 
 | Funcția                 | Descriere                            |
 | ----------------------- | ------------------------------------ |
@@ -95,6 +99,8 @@ Există două tipuri conversie:
 | `GREATEST(n1, ..., nk)` | cel mai mare număr dintr-o listă     |
 ### Funcții pentru prelucrarea datelor calendaristice 
 
+Vezi [[Courses/DB/bd.l2#Exerciții cu funcții pe date calendaristice\|exerciții]].
+
 | Funcție                        | Descriere                                                                                                                             | Exemplu                                                    |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `SYSDATE`                      | întoarce data și timpul curent                                                                                                        | [[Courses/DB/bd.l1#Exercițiul 13\| ex. 13]]                           |
@@ -113,6 +119,7 @@ Există două tipuri conversie:
 
 ### Funcții diverse
 
+Vezi [[Courses/DB/bd.l2#Exerciții cu funcții diverse\|exerciții]].
 
 | Funcție                                                       | Descriere                                                                                                                         | Exemplu                                                                                           |
 | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -170,14 +177,284 @@ Tipuri de date acceptate:
 - `COUNT(*)` numără **toate rândurile**, indiferent dacă au valori nule.
 - `COUNT(coloana)` numără **doar rândurile unde coloana NU e `NULL`**.
 
-Când este utilizată clauza GROUP BY, server-ul sortează implicit mulţimea rezultată în
+Când este utilizată clauza GROUP BY, server-ul sortează implicit mulțimea rezultată în
 ordinea crescătoare a valorilor coloanelor după care se realizează gruparea.
 
+# Exerciții
 
+## Exerciții cu funcții pe șiruri de caractere 
 
+Vezi [[Courses/DB/bd.l2#Funcții pentru prelucrarea caracterelor\|teorie]].
+### Exercițiul 1
 
+Scrieți o cerere care are următorul rezultat pentru fiecare angajat:
+`<prenume angajat>` `<nume angajat>` câștigă `<salariu> `lunar dar dorește `<salariu de 3 ori mai mare>`. Etichetați coloana “Salariu ideal”. Pentru concatenare, utilizați atât funcția
+`CONCAT` cât ți operatorul “||”.
 
+*Soluție*
 
+```sql
+SELECT CONCAT(LAST_NAME || ' ', FIRST_NAME) || ' castiga ' ||
+       SALARY || ' dar doreste ' || (SALARY * 3) "Salariu ideal"
+FROM EMPLOYEES;
+```
 
+### Exercițiul 2
 
+Scrieți o cerere prin care să se afișeze prenumele salariatului cu prima litera majusculă
+și toate celelalte litere minuscule, numele acestuia cu majuscule și lungimea
+numelui, pentru angajații al căror nume începe cu J sau M sau care au a treia literă din
+nume A. Rezultatul va fi ordonat descrescător după lungimea numelui. Se vor eticheta
+coloanele corespunzător. Se cer 2 soluţii (cu operatorul LIKE și funcția `SUBSTR`).
+
+*Soluție cu `LIKE`*
+
+```sql
+SELECT INITCAP(FIRST_NAME),
+       UPPER(LAST_NAME),
+       LENGTH(LAST_NAME)
+FROM EMPLOYEES
+WHERE UPPER(LAST_NAME) LIKE 'J%' OR
+      UPPER(LAST_NAME) LIKE 'M%' OR
+      UPPER(LAST_NAME) LIKE '__A%'
+ORDER BY LENGTH(LAST_NAME);
+```
+
+*Soluție cu `SUBSTR`*
+
+```sql
+SELECT INITCAP(FIRST_NAME),
+       UPPER(LAST_NAME),
+       LENGTH(LAST_NAME)
+FROM EMPLOYEES
+WHERE SUBSTR(UPPER(LAST_NAME), 1, 1) = 'M' OR
+      SUBSTR(UPPER(LAST_NAME), 1, 1) = 'J' OR
+      SUBSTR(UPPER(LAST_NAME), 3, 1) = 'A'
+ORDER BY LENGTH(LAST_NAME);
+```
+
+### Exercițiul 3
+
+Să se afișeze, pentru angajații cu prenumele „Steven”, codul și numele acestora, precum
+și codul departamentului în care lucrează. Căutarea trebuie să nu fie case-sensitive, iar
+eventualele blank-uri care preced sau urmează numelui trebuie ignorate.
+
+*Soluție*
+
+```sql
+SELECT EMPLOYEE_ID, LAST_NAME, DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE INITCAP(TRIM(BOTH FROM FIRST_NAME)) = 'Steven';
+```
+
+### Exercițiul 4
+
+Să se afișeze pentru toți angajații al căror nume se termină cu litera 'e', codul, numele,
+lungimea numelui și poziția din nume în care apare prima data litera 'A'. Utilizați alias-uri
+corespunzătoare pentru coloane.
+
+*Soluție*
+
+```sql
+SELECT EMPLOYEE_ID, LAST_NAME,
+       LENGTH(LAST_NAME) "Lungimea numelui",
+       INSTR(UPPER(LAST_NAME), 'A', 1, 1) "Prima aparitie 'A'"
+FROM EMPLOYEES
+WHERE SUBSTR(UPPER(LAST_NAME), -1) = 'E';
+```
+
+## Exerciții cu funcții aritmetice
+
+Vezi [[Courses/DB/bd.l2#Funcții aritmetice\|teoria]].
+### Exercițiul 5
+
+Să se afișeze detalii despre salariații care au lucrat un număr întreg de săptămâni până
+la data curentă.
+
+```sql
+SELECT *
+FROM EMPLOYEES
+WHERE (SYSDATE - HIRE_DATE) / 7  = ROUND((SYSDATE - HIRE_DATE)/7);
+```
+
+### Exercițiul 6
+
+Să se afișeze codul salariatului, numele, salariul, salariul mărit cu 15%, exprimat cu
+două zecimale și numărul de sute al salariului nou rotunjit la 2 zecimale. Etichetați
+ultimele două coloane “Salariu nou”, respectiv “Numar sute”. Se vor lua în considerare
+salariații al căror salariu nu este divizibil cu 1000.
+
+```sql
+SELECT EMPLOYEE_ID, LAST_NAME, SALARY,
+       ROUND(SALARY * 1.15, 2) "Salariu Nou",
+       ROUND((SALARY * 1.15)/100, 2) "Numar sute"
+FROM EMPLOYEES
+WHERE MOD(SALARY, 1000) != 0;
+```
+
+### Exercițiul 7
+
+Să se listeze numele și data angajării salariaților care câștigă comision. Să se
+eticheteze coloanele „Nume angajat”, „Data angajarii”. Utilizați funcția `RPAD` pentru a
+determina ca data angajării să aibă lungimea de 20 de caractere.
+
+```sql
+SELECT LAST_NAME "Nume Angajat",
+       RPAD(HIRE_DATE, 20) "Data Angajarii"
+FROM EMPLOYEES
+WHERE COMMISSION_PCT IS NOT NULL;
+```
+
+## Exerciții cu funcții pe date calendaristice 
+
+Vezi [[Courses/DB/bd.l2#Funcții pentru prelucrarea datelor calendaristice\|teorie]].
+### Exercițiul 8
+
+Să se afișeze data (numele lunii, ziua, anul, ora, minutul și secunda) de peste 30 zile.
+
+*Soluție*
+
+```sql
+SELECT TO_CHAR(SYSDATE + 30, 'Month DD, YYYY HH24:MI:SS') "Data viitoare"
+FROM DUAL;
+```
+
+### Exercițiul 9
+
+Să se afișeze numărul de zile rămase până la sfârșitul anului.
+
+*Soluție*
+
+```sql
+SELECT TO_DATE('31-12-2025', 'DD-MM-YYYY') - SYSDATE
+FROM DUAL;
+```
+
+### Exercițiul 10
+
+a) Să se afișeze data de peste 12 ore.
+
+*Soluție*
+
+```sql
+SELECT TO_CHAR(SYSDATE + 1/2, 'DD-MM-YYYY')
+FROM DUAL;
+```
+
+b) Să se afișeze data de peste 5 minute
+
+*Soluție*
+
+```sql
+SELECT TO_CHAR(SYSDATE + 5/(24*60), 'DD/MM HH24:MI:SS')
+FROM DUAL;
+```
+
+Pentru că 
+$$
+\frac{5 \text{ min}}{1 \text{ zi}} = \frac{5 \text{ min}}{24 \text{ (h)} \;\cdot 60\; \text{ min}}
+$$
+### Exercițiul 11
+
+Să se afișeze numele și prenumele angajatului (într-o singură coloană), data angajării și
+data negocierii salariului, care este prima zi de Luni după 6 luni de serviciu. Etichetați
+această coloană “Negociere”.
+
+*Soluție*
+
+```sql
+SELECT LAST_NAME || ' ' || FIRST_NAME "Nume Complet",
+       HIRE_DATE,
+       NEXT_DAY(ADD_MONTHS(HIRE_DATE, 6), 'Monday') "Data Negocierii Salariului"
+FROM EMPLOYEES;
+```
+
+### Exercițiul 12
+
+Pentru fiecare angajat să se afișeze numele și numărul de luni de la data angajării.
+Etichetați coloana “Luni lucrate”. Să se ordoneze rezultatul după numărul de luni lucrate.
+Se va rotunji numărul de luni la cel mai apropiat număr întreg.
+
+*Soluție*
+
+```sql
+SELECT LAST_NAME,
+       ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)) "Luni lucrate"
+FROM EMPLOYEES
+ORDER BY "Luni lucrate";
+```
+
+Alte moduri de a ordona:
+
+```
+ORDER BY ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE));
+```
+
+```SQL
+ORDER BY 2; -- a doua coloana
+```
+
+## Exerciții cu funcții diverse
+
+Vezi [[Courses/DB/bd.l2#Funcții diverse\|teoria]].
+### Exercițiul 13
+
+Să se afișeze numele angajaților și comisionul. Dacă un angajat nu câștigă comision, să
+se scrie “Fara comision”. Etichetați coloana “Comision”
+
+```sql
+SELECT LAST_NAME,
+       NVL(TO_CHAR(COMMISSION_PCT), 'Nu are comision') "Comision"
+FROM EMPLOYEES;
+```
+
+### Exercițiul 14
+
+Să se listeze numele, salariul și comisionul tuturor angajaților al căror venit lunar
+(salariu + valoare comision) depășește 10 000.
+
+```sql
+SELECT LAST_NAME, SALARY, COMMISSION_PCT
+FROM EMPLOYEES
+WHERE SALARY * (1 + NVL(COMMISSION_PCT, 0)) > 10000;
+```
+
+Pentru că pot exista salarii $>$ 10000, dar comisionul să nu existe (i.e.,  e  `NULL`).
+
+Dar `1 + NULL` -> `NULL`, și `Salary * NULL` -> `NULL`.
+
+Deci trebuie `NVL` ca să seteze valoarea comisionului la $0$ atunci când e `NULL`.
+
+### Exercițiul 15
+
+Să se afișeze numele, codul funcției, salariul și o coloana care să arate salariul după
+mărire. Se știe că pentru IT_PROG are loc o mărire de 10%, pentru ST_CLERK 15%, iar
+pentru SA_REP o mărire de 20%. Pentru ceilalți angajați nu se acordă mărire. Să se
+denumească coloana "Salariu renegociat".
+
+*Soluție* 
+
+Cu `DECODE`:
+
+```sql
+SELECT LAST_NAME, JOB_ID, SALARY,
+       DECODE(JOB_ID,
+           'IT_PROG', SALARY * 1.1,
+           'ST_CLERK', SALARY * 1.15,
+           'SA_REP', SALARY * 1.2,
+            SALARY) "Salariu renegociat"
+FROM EMPLOYEES;
+```
+
+Cu `CASE`:
+
+```sql
+SELECT LAST_NAME, JOB_ID, SALARY,
+       CASE WHEN JOB_ID = 'IT_PROG' THEN SALARY * 1.1
+            WHEN JOB_ID = 'ST_CLERK' THEN SALARY * 1.15
+            WHEN JOB_ID = 'SA_REP' THEN SALARY * 1.2
+            ELSE SALARY
+        END "Salariu renegociat"
+FROM EMPLOYEES;
+```
 
