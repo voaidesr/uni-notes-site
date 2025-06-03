@@ -30,6 +30,7 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 >[!proof]- 4. Limbaje Formale și Automate
 
 >[!proof]- 5. Geometrie și Algebră liniară
+>- [[Courses/Maths/Linear Algebra/gal.c1\|Curs 1]]
 >- [[Courses/Maths/Linear Algebra/gal.c7\|Curs 7]]
 >- [[Courses/Maths/Linear Algebra/gal.c8\|Curs 8]]
 >- [[Courses/Maths/Linear Algebra/gal.c9\|Curs 9]]
