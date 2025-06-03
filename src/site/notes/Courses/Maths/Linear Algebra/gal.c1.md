@@ -45,7 +45,8 @@ $A \in \mathcal{M}_n(\mathbb{K})$ o matrice
 *Proprietate*
 $A$ nesingulară $\iff$ $A$ inversabilă.
 
-### Proprietăți determinant
+### Proprietăți ale determinantului
+
 - $\operatorname{det}(AB) = \operatorname{det} A \cdot \operatorname{det} B$
 
 - $\operatorname{det}(A^{\top}) = \operatorname{det} A$, unde $A^{\top} = (b_{ij})_{i,j = \overline{1,n}} \quad b_{ij}  = a_{ji}$
@@ -75,5 +76,39 @@ Unde $A^*$
 $$
 A^*_{ij} = (-1)^{i+j}\, \delta_{ij} \qquad \delta_{ij} = \text{ minorul}
 $$
+## Grupuri de matrici 
 
+- $\operatorname{GL}(n, \mathbb{K}) = \{A \in \mathcal{M}_n(\mathbb{K}) \,|\, \det{A} \neq 0 \}$ **Grupul General Liniar**
+
+- $\operatorname{SL}(n, \mathbb{K}) = \{A \in \operatorname{GL}(n, \mathbb{K}) \,|\, \det{A} = 1) \}$ **Grupul Special Liniar** 
+
+- $\operatorname{O}(n, \mathbb{K}) = \{A \in \mathcal{M}_n(\mathbb{K}) \,|\, A \cdot A^{\top} = I_n \}$ **Grupul Ortogonal** ($\det{A} = \pm 1$)
+
+- $\operatorname{SO}(n, \mathbb{K}) = \{A \in \operatorname{O}(n, \mathbb{K}) \,|\, \det{A} = 1) \}$ **Grupul Special Ortogonal**
+
+***Observație***
+$$
+\operatorname{SO}(n, \mathbb{K})  =  \operatorname{SL}(n, \mathbb{K})\; \cap \;\operatorname{GL}(n, \mathbb{K})
+$$
+## Rang
+
+Pentru o matrice $A \in \mathcal{M}_{m,n}(\mathbb{K})$ ($A \neq O_{m,n}$), rangul este $k$ $\iff$ $\exists$ un minor ordin $k$ nenul, iar toți minorii de ordin mai mare (dacă există) sunt nuli.
+
+Notăm
+$$
+\operatorname{rg}A = k
+$$
+Convenție: $\operatorname{rg} O_{m,n} = 0$ 
+
+*Observație*
+
+Există $C_m^{k+1} \cdot C_n^{k+1}$ minori de ordin $k+1$ pentru $A$.
+
+***Teorema***
+
+$\operatorname{rg} A = k \iff$ Există un minor de ordin $k$ nenul și toți minorii de ordin $k+1$ care îl conțin pe $\Delta_k$ (dacă există) sunt nuli.
+
+*Observație*
+
+Există $(m-k)(n-k)$ minori de ordinul $k+1$ care îl conțin pe $\Delta_k$. (am optimizat algoritmul)
 
