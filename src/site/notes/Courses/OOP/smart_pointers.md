@@ -80,14 +80,13 @@ Utilizare:
 }  // object deleted only after both go out of scope
 ```
 
-# `weak_ptr`
+# `weak_ptr` 
 
 - nu deține, nu afectează reference count 
 - observa obiectul deținut de `shared_ptr`, nu extinde lifetime-ul
 - must be converted to `shared_ptr` to access object safely
-`
 Exemplu: 
-``
+
 ```cpp
 #include <memory>
 
