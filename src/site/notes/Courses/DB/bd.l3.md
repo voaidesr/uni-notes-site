@@ -10,7 +10,7 @@ Vezi [[Courses/DB/bd.l3#Exerciții Join\|exerciții]].
 
 **Join-ul** reprezintă operația de regăsire a datelor din două sau mai multe tabele, pe baza valorilor comune ale unor coloane. De obicei, aceste coloane reprezintă **cheia primară**, respectiv **cheia externă** a tabelelor.
 
->[!proof] 
+>[!proof]  join
 >Pentru a realiza un JOIN între $n$ tabele, e nevoie de cel puțin $n-1$ condiții de JOIN.
 
 ### Tipuri de Join
