@@ -374,3 +374,121 @@ Full outer join se poate realiza fie prin reuniunea rezultatelor lui right outer
 join și left outer join, fie utilizând sintaxa specifică standardului SQL3.
 
 ## Operatori pe mulțimi
+
+Vezi [[Courses/DB/bd.l3#Exerciții cu operatori de mulțimi\|exerciții]].
+
+Operațiile pe mulțimi combină rezultatele obținute din două (sau mai multe) interogări.
+- cererile care conțin operatori pe mulțimi se numesc **cereri compuse**
+
+Există patru operatori 
+- union
+- union all
+- intersect 
+- minus
+
+Toți operatorii pe mulțimi au aceeași precedență. Dacă sunt mai mulți, de se evaluează de la stânga la dreapta (de sus în jos). Pentru a schimba ordinea, se utilizează paranteze. 
+
+### Union 
+
+Returnează toate liniile selectate de cele două cereri, *eliminând duplicatele*.
+
+Nu ignoră `NULL` și are precedență mai mică decât `IN`.
+
+### Union all
+
+Returnează toate liniile selectate de cereri, **fără a elimina duplicatele**.
+
+Precizările de la union, valabile și aici.
+
+>[!warning] Distinct
+>În cererile asupra cărora se aplică Union All nu se poate folosi Distinct.
+
+### Intersect 
+
+Returnează toate liniile **comune** cererilor asupra cărora se aplică. Nu ignoră valorile `NULL`.
+
+### Minus
+
+Determină liniile returnate de prima cerere care nu apar în rezultatul celei de-a doua cereri.
+
+Pentru ca operatorul MINUS să funcționeze, este necesar ca toate coloanele din clauza WHERE să se afle și în clauza SELECT.
+
+>[!warning]
+>- Pentru o cerere care utilizează operatori pe mulțimi, cu excepția lui UNION ALL, server-ul Oracle elimină liniile duplicat.
+>- În instrucțiunile SELECT asupra cărora se aplică operatori pe mulțimi, coloanele
+selectate trebuie să corespundă ca număr și tip de date. Nu este necesar ca
+numele coloanelor să fie identice. Numele coloanelor din rezultat sunt
+determinate de numele care apar în clauza SELECT a primei cereri.
+
+
+### Exerciții cu operatori de mulțimi
+
+Vezi [[Courses/DB/bd.l3#Operatori pe mulțimi\|teoria]].
+
+#### Exercițiul 1 
+
+Se cer codurile departamentelor al căror nume conține șirul “re” sau în care
+lucrează angajați având codul job-ului “SA_REP”.
+
+*Soluție*
+
+```SQL
+SELECT DEPARTMENT_ID
+FROM DEPARTMENTS
+WHERE LOWER(DEPARTMENT_NAME) LIKE '%re%'
+
+UNION
+
+SELECT DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE UPPER(JOB_ID) = 'SA_REP';
+```
+
+#### Exercițiul 2
+
+dacă se folosește `UNION ALL` apar duplicate 
+
+#### Exercițiul 3
+
+Să se obțină codurile departamentelor în care nu lucrează nimeni (nu este
+introdus niciun salariat în tabelul employees). Se cer două soluții.
+
+*Soluție 1*
+
+```sql
+SELECT DEPARTMENT_ID
+FROM DEPARTMENTS
+
+MINUS
+
+SELECT DEPARTMENT_ID
+FROM EMPLOYEES;
+```
+
+*Soluție 2*
+
+```sql
+SELECT d.DEPARTMENT_ID
+FROM DEPARTMENTS d LEFT JOIN EMPLOYEES e
+    ON (d.DEPARTMENT_ID = e.DEPARTMENT_ID)
+WHERE e.DEPARTMENT_ID IS NULL;
+```
+
+#### Exercițiul 4 
+
+Se cer codurile departamentelor al căror nume conține șirul “re” și în care
+lucrează angajați având codul job-ului “HR_REP”.
+
+*Soluție*
+
+```sql
+SELECT DEPARTMENT_ID
+FROM DEPARTMENTS
+WHERE LOWER(DEPARTMENT_NAME) LIKE '%re%'
+
+INTERSECT
+
+SELECT DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE JOB_ID = 'HR_REP';
+```
