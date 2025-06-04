@@ -304,12 +304,73 @@ FROM EMPLOYEES e JOIN EMPLOYEES p
 WHERE INITCAP(p.LAST_NAME) = 'Grant';
 ```
 
+#### Exercițiul 9
 
+Scrieți o cerere pentru a afișa numele salariatului, luna (în litere), anul
+angajării și valoarea comisionului pentru toți salariații din același departament
+cu Gates (last_name este Gates) – se verifică numele scris cu prima literă mare
+și restul literelor mici, al căror nume conține litera “a”. Se va exclude Gates. Se
+vor utiliza aliasuri pentru numele coloanelor din output. În cazul în care un
+angajat nu câștigă comision, se va scrie în output, pe coloana respectivă,
+mesajul “Nu câștigă comision”. Rezultatul se va ordona alfabetic după numele
+salariaților. 
 
+*Soluție*
 
+```sql
+SELECT e.LAST_NAME,
+       TO_CHAR(e.HIRE_DATE, 'Month') "Luna",
+       TO_CHAR(e.HIRE_DATE, 'YYYY') "An",
+       NVL(TO_CHAR(e.SALARY * e.COMMISSION_PCT), 'Nu gastiga comision') "Valoare comision"
+FROM EMPLOYEES e JOIN EMPLOYEES p
+    ON(e.DEPARTMENT_ID = p.DEPARTMENT_ID)
+WHERE INITCAP(p.LAST_NAME) = 'Gates'
+        and e.EMPLOYEE_ID != p.EMPLOYEE_ID
+        and LOWER(e.LAST_NAME) LIKE '%a%'
+ORDER BY e.LAST_NAME;
+```
 
+#### Exercițiul 10 
 
+Să se afișeze numele, salariul, titlul job-ului, orașul și țara în care lucrează
+angajații conduși direct de King.
 
+*Soluție*
 
+```sql
+SELECT e.LAST_NAME, e.SALARY, JOB_TITLE, CITY, COUNTRY_NAME
+FROM EMPLOYEES e JOIN EMPLOYEES m ON (e.MANAGER_ID = m.EMPLOYEE_ID)
+                JOIN JOBS j ON e.JOB_ID = j.JOB_ID
+                JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+                JOIN LOCATIONS l ON d.LOCATION_ID = l.LOCATION_ID
+                JOIN COUNTRIES c ON c.COUNTRY_ID = l.COUNTRY_ID
+WHERE INITCAP(m.LAST_NAME) = 'King';
+```
 
+#### Exercițiul 11
 
+Să se afișeze codul departamentului, numele departamentului, numele și job-
+ul tuturor angajaților din departamentele al căror nume conține șirul ‘ti’. De
+asemenea, se va lista salariul angajaților, în formatul “$99,999.00”. Rezultatul
+se va ordona alfabetic după numele departamentului, și în cadrul acestuia,
+după numele angajaților.
+
+*Soluție*
+
+```sql
+SELECT e.DEPARTMENT_ID, DEPARTMENT_NAME, LAST_NAME, JOB_TITLE,
+       TO_CHAR(SALARY, '$99,999.00')
+FROM EMPLOYEES e JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+                JOIN JOBS j ON e.JOB_ID = j.JOB_ID
+WHERE LOWER(DEPARTMENT_NAME) LIKE '%ti%'
+ORDER BY DEPARTMENT_NAME, LAST_NAME;
+```
+
+#### Exercițiul 12 
+
+Cum se poate implementa full outer join?
+
+Full outer join se poate realiza fie prin reuniunea rezultatelor lui right outer
+join și left outer join, fie utilizând sintaxa specifică standardului SQL3.
+
+## Operatori pe mulțimi
