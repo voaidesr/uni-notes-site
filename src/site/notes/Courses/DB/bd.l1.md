@@ -16,7 +16,7 @@
 
 SQL permite:
 - definirea datelor (LDD)
-- prelucrarea și interogarea datelor (LMD)
+- prelucrarea și interogarea datelor ([[Courses/DB/bd.l4#LMD\|LMD]]LMD)
 - controlul accesului la date (LCD)
 
 Comenzile din SQL pot fi integrate în programe scrise în alte limbaje.
