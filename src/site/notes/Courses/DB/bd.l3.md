@@ -6,6 +6,8 @@
 
 ## Join 
 
+Vezi [[Courses/DB/bd.l3#Exerciții Join\|exerciții]].
+
 **Join-ul** reprezintă operația de regăsire a datelor din două sau mai multe tabele, pe baza valorilor comune ale unor coloane. De obicei, aceste coloane reprezintă **cheia primară**, respectiv **cheia externă** a tabelelor.
 
 >[!proof] 
@@ -25,6 +27,24 @@ FROM EMPLOYEES e JOIN DEPARTMENTS d
     ON e.DEPARTMENT_ID = d.DEPARTMENT_ID;
 ```
 
+*Sintaxa*
+
+- Condiția poate fi scrisă în clauza `WHERE`
+
+```sql
+SELECT e.LAST_NAME, d.DEPARTMENT_NAME
+FROM EMPLOYEES e, DEPARTMENTS d
+WHERE e.DEPARTMENT_ID = d.DEPARTMENT_ID;
+```
+
+- Condiția poate fi în clauza `FROM` - **standardul SQL3**
+	- utilizând `ON`. (vezi primul exemplu)
+	- utilizând `USING` - efectuează equijoin pe baza coloanei cu nume specificat în sintaxă. 
+
+```sql
+SELECT e.LAST_NAME, d.DEPARTMENT_NAME
+FROM EMPLOYEES e JOIN DEPARTMENTS d USING(DEPARTMENT_ID);
+```
 #### Nonequijoin 
 
 Condiția de join conține alți operatori decât cel de egalitate.
@@ -81,4 +101,215 @@ FROM EMPLOYEES e LEFT JOIN EMPLOYEES m
 ```
 
 Într-o instrucțiune `SELECT` cu `JOIN`, se recomandă prefixarea numelor coloanelor cu numele sau alias-ul tabelului pentru claritate și performanță. Dacă o coloană apare în mai multe tabele, prefixarea devine obligatorie.
+
+### Inner join vs. Outer join 
+
+Exemplu 
+
+```sql
+SELECT employee_id, department_name
+FROM employees e JOIN departments d ON (e.department_id = d.department_id);
+```
+
+Acest **inner join** afișează toți angajații care lucrează în departamente.
+
+Pot exista angajați care nu au departamente! (i.e. `e.DEPARTMENT_ID = NULL`)
+
+explicație 
+- left join -> aduce toate rândurile din stânga, chiar dacă nu au corespondență în dreapta
+- right join -> la fel, dar pentru dreapta
+
+Știm că există angajați care nu au departamente, dar vrem să vedem toți angajații -> left join.
+
+```sql
+SELECT employee_id, department_name
+FROM employees e LEFT JOIN departments d 
+	ON (e.department_id = d.department_id);
+```
+
+Știm și că există departamente care nu au angajați, vrem să vedem toate departamentele:
+
+```sql
+SELECT employee_id, department_name
+FROM employees e RIGHT JOIN departments d 
+	ON (e.department_id = d.department_id);
+```
+
+(aici angajatul care nu face parte din niciun departament este ignorat);
+
+Dacă vrem toate informațiile (și departamentele fără angajați, și angajații fără departament) -> `FULL JOIN`.
+
+>[!warning] Notația cu `(+)`
+>`(+)` se pune pe partea opusă a tipului de `JOIN`
+>
+>`LEFT JOIN` -> `(+)` pe dreapta
+
+>[!danger]
+>`FULL JOIN` nu are echivalent cu `(+)` -> operatorul nu poate fi scris în amândouă părțile
+
+### Join în standardul SQL3 
+
+Oracle oferă pentru JOIN și o sintaxă specifică, în conformitate cu standardul SQL3.
+- nu aduce beneficii de performanță față de sintaxa anterior prezentată 
+- cuvinte cheie 
+	- `CROSS JOIN` -> produs cartezian
+	- `NATURAL JOIN`
+	- `FULL OUTER JOIN`
+	- clauzele `USING`, `ON`
+
+Sintaxa:
+
+```sql
+SELECT tabel_1.nume_coloana, tabel_2.nume_coloana
+FROM   tabel_1
+       [CROSS JOIN tabel_2]
+     / [NATURAL JOIN tabel_2]
+     / [JOIN tabel_2 USING (nume_coloană)]
+     / [JOIN tabel_2 ON (condiție)]
+     / [LEFT | RIGHT | FULL OUTER JOIN tabel_2
+        ON (tabel_1.eume_coloana = tabel_2.nume_coloana)];
+```
+
+**Natural join** presupune existența unor coloane care au același nume în ambele tabele. Dacă tipurile de date ale coloanelor cu același nume sunt *diferite*, atunci va fi returnată o eroare.
+
+Coloanele având același nume în cele două tabele trebuie să nu fie precedate de
+numele sau alias-ul tabelului corespunzător.
+
+Clauzele NATURAL JOIN și USING nu pot coexista în aceeași instrucțiune SQL.
+
+```sql
+SELECT LAST_NAME, JOB_ID, JOB_TITLE
+FROM EMPLOYEES NATURAL JOIN JOBS;
+```
+
+### Exerciții Join
+
+Vezi [[Courses/DB/bd.l3#Join\|teoria]].
+#### Exercițiul 1
+
+Să se listeze codurile și denumirile job-urilor care există în departamentul
+30.
+
+*Soluție*
+
+```sql
+SELECT J.JOB_ID, J.JOB_TITLE
+FROM EMPLOYEES E JOIN JOBS J ON(E.JOB_ID = J.JOB_ID)
+WHERE E.DEPARTMENT_ID = 30;
+```
+
+#### Exercițiul 2
+
+Să se afișeze numele angajatului, numele departamentului și id-ul locației
+pentru toți angajații care câștigă comision.
+
+*Soluție*
+
+```sql
+SELECT LAST_NAME, d.DEPARTMENT_NAME, LOCATION_ID
+FROM EMPLOYEES e JOIN DEPARTMENTS d ON (e.DEPARTMENT_ID = d.DEPARTMENT_ID)
+WHERE COMMISSION_PCT IS NOT NULL;
+```
+
+#### Exercițiul 3
+
+Să se afișeze numele angajaților, titlul job-ului și denumirea
+departamentului pentru toți angajații care lucrează în Oxford (coloana - city).
+
+*Soluție*
+
+```sql
+SELECT LAST_NAME, JOB_TITLE, DEPARTMENT_NAME
+FROM EMPLOYEES e JOIN DEPARTMENTS d ON (e.DEPARTMENT_ID = d.DEPARTMENT_ID)
+                JOIN LOCATIONS l ON (d.LOCATION_ID = l.LOCATION_ID)
+                JOIN JOBS j ON (e.JOB_ID = j.JOB_ID)
+WHERE LOWER(l.CITY) =  'oxford';
+```
+
+#### Exercițiul 4
+
+Să se afișeze codul angajatului și numele acestuia, împreună cu numele și
+codul șefului său direct. Se vor eticheta coloanele Cod Angajat, Nume
+Angajat, Cod Manager, Nume Manager. 
+
+*Soluție*
+
+```sql
+SELECT e.EMPLOYEE_ID "Cod angajat",
+       e.LAST_NAME "Nume angajat",
+       m.EMPLOYEE_ID "Cod manager",
+       m.LAST_NAME "Nume Manager"
+FROM EMPLOYEES e JOIN EMPLOYEES m
+    ON(e.MANAGER_ID = m.EMPLOYEE_ID);
+```
+
+#### Exercițiul 5 
+
+Să se modifice cererea anterioară pentru a afișa toți salariații, inclusiv cei care
+nu au șef.
+
+*Soluție*
+
+```sql
+SELECT e.EMPLOYEE_ID "Cod angajat",
+       e.LAST_NAME "Nume angajat",
+       m.EMPLOYEE_ID "Cod manager",
+       m.LAST_NAME "Nume Manager"
+FROM EMPLOYEES e LEFT JOIN EMPLOYEES m
+    ON(e.MANAGER_ID = m.EMPLOYEE_ID);
+```
+
+#### Exercițiul 6
+
+Scrieți o cerere care afișează numele angajatului, codul departamentului în
+care acesta lucrează și numele colegilor săi de departament. Se vor eticheta
+coloanele corespunzător.
+
+*Soluție*
+
+```sql
+SELECT e.LAST_NAME, e.DEPARTMENT_ID,
+       c.LAST_NAME
+FROM EMPLOYEES e JOIN EMPLOYEES c
+    ON(e.DEPARTMENT_ID = c.DEPARTMENT_ID)
+WHERE e.EMPLOYEE_ID != c.EMPLOYEE_ID;
+```
+
+#### Exercițiul 7
+
+Creați o cerere prin care să se afișeze numele angajaților, codul job-ului,
+titlul job-ului, numele departamentului și salariul angajaților. Se vor include
+și angajații al căror departament nu este cunoscut.
+
+*Soluție*
+
+```sql
+SELECT LAST_NAME, e.JOB_ID, JOB_TITLE, DEPARTMENT_NAME, SALARY
+FROM EMPLOYEES e LEFT JOIN DEPARTMENTS d ON (e.DEPARTMENT_ID = d.DEPARTMENT_ID)
+                LEFT JOIN JOBS j ON(e.JOB_ID = j.JOB_ID);
+```
+
+#### Exercițiul 8
+
+Să se afișeze numele și data angajării pentru salariații care au fost angajați
+după salariatul cu numele (last_name) Gates.
+
+*Soluție*
+
+```sql
+SELECT e.LAST_NAME,
+       e.HIRE_DATE
+FROM EMPLOYEES e JOIN EMPLOYEES p
+    ON(e.HIRE_DATE > p.HIRE_DATE)
+WHERE INITCAP(p.LAST_NAME) = 'Grant';
+```
+
+
+
+
+
+
+
+
+
 
