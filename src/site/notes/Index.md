@@ -25,6 +25,7 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 >>- [[Courses/DB/bd.l1\|Lab 1]]
 >>- [[Courses/DB/bd.l2\|Lab 2]]
 >>- [[Courses/DB/bd.l3\|Lab 3]]
+>>- [[Courses/DB/bd.l4\|Lab 4]]
 >
 >>[!hint]- Cursuri
 
