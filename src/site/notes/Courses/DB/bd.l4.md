@@ -341,3 +341,25 @@ Suprimaţi departamentele care nu au angajati. Anulaţi modificările.
 
 ### Exercițiul 17 
 
+Să se mai introducă o linie in tabelul DEPT_PNU.
+
+```sql
+INSERT INTO DEPT(DEPARTMENT_ID, DEPARTMENT_NAME)
+    VALUES(5, 'IT');
+```
+
+### Exercițiul 18 + 19 + 20
+
+Să se şteargă din tabelul DEPT_PNU departamentele care au codul de departament cuprins
+intre 160 si 200 . Listaţi conţinutul tabelului.
+
+```sql
+SAVEPOINT P;
+
+DELETE FROM DEPT
+WHERE DEPARTMENT_ID BETWEEN 160 AND 200;
+
+SELECT * FROM DEPT;
+
+ROLLBACK TO P;
+```
