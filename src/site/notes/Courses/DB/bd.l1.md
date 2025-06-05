@@ -15,9 +15,9 @@
 	- Compilatorul limbajului generează o procedură care accesează baza de date
 
 SQL permite:
-- definirea datelor (LDD)
-- prelucrarea și interogarea datelor ([[Courses/DB/bd.l4#LMD\|LMD]]LMD)
-- controlul accesului la date (LCD)
+- definirea datelor ([[Courses/DB/bd.l5\|LDD]])
+- prelucrarea și interogarea datelor ([[Courses/DB/bd.l4#LMD\|LMD]])
+- controlul accesului la date ([[Courses/DB/bd.l4#LCD\|LCD]])
 
 Comenzile din SQL pot fi integrate în programe scrise în alte limbaje.
 
