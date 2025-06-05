@@ -143,3 +143,131 @@ CREATE TABLE DEPARTAMENTE (
 );
 ```
 
+## Modificarea structurii tabelelor 
+
+Modificarea se face cu ALTER TABLE. 
+
+Forma comenzii depinde de tipul modificării aduse:
+
+- Adăugarea unei coloane (nu se poate specifica poziția, automat se adaugă ultima)
+
+```sql
+ALTER TABLE nume_tabel
+ADD (coloana tip_de_date [DEFAULT expr][, ...]);
+```
+
+- Modificarea unei coloane (schimbare tip de date, dimensiunii, valorii implicite (-> val. implicită se aplică doar pentru valorile noi ce urmează a fi introduse))
+
+```sql
+ALTER TABLE nume_tabel
+MODIFY (coloana tip_de_date [DEFAULT expr][, ...]);
+```
+
+- eliminarea unei coloane din structura tabelului 
+
+```sql
+ALTER TABLE nume_tabel
+DROP COLUMN coloana;
+```
+
+**Observații:**
+
+- dimensiunea unei coloane numerice sau de tip caracter poate fi mărită, dar nu poate fi micșorată decât dacă acea coloană conține numai valori `NULL` sau dacă tabelul nu conține nicio linie.
+- tipul de date al unei coloane poate fi modificat doar dacă valorile coloanei respective sunt `NULL`.
+- o coloană `CHAR` poate fi convertită la tipul de date `VARCHAR2` sau invers, numai dacă valorile coloanei sunt `NULL` sau dacă nu se modifică dimensiunea coloanei.
+    
+Comanda `ALTER` permite adăugarea unei constrângeri într-un tabel existent, eliminarea, activarea sau dezactivarea constrângerilor.
+
+Pentru adăugare de constrângeri, comanda are forma:
+
+```sql
+ALTER TABLE nume_tabel
+ADD [CONSTRAINT nume_constr] tip_constr (coloana);
+```
+
+Pentru eliminare de constrângeri:
+
+```sql
+ALTER TABLE nume_tabel
+DROP PRIMARY KEY | UNIQUE (col1, col2, ...) | CONSTRAINT nume_constr;
+```
+
+Pentru activare/dezactivare de constrângeri:
+
+```sql
+ALTER TABLE nume_tabel
+MODIFY CONSTRAINT nume_constr ENABLE | DISABLE;
+```
+
+sau:
+
+```sql
+ALTER TABLE nume_tabel
+ENABLE | DISABLE CONSTRAINT nume_constr;
+```
+
+## Suprimarea tabelelor 
+
+**Ștergerea fizică** a unui tabel, inclusiv a înregistrărilor acestuia, se realizează prin comanda:
+
+```sql
+DROP TABLE nume_tabel;
+```
+
+- Odată executată, instrucțiunea `DROP TABLE` este ireversibilă;
+    
+- Ca și în cazul celorlalte instrucțiuni ale limbajului de definire a datelor, această comandă nu poate fi anulată (`ROLLBACK`);
+    
+- Oracle 10g a introdus o nouă manieră pentru suprimarea unui tabel:
+    - Când se șterge un tabel, baza de date nu eliberează imediat spațiul asociat tabelului;
+    - Ea redenumește tabelul și acesta este plasat într-un "recycle bin" de unde poate fi eventual recuperat ulterior prin comanda `FLASHBACK TABLE`:
+
+```sql
+FLASHBACK TABLE exemplu TO BEFORE DROP;
+```
+
+- Ștergerea unui tabel se poate face simultan cu eliberarea spațiului asociat tabelului, dacă este utilizată clauza `PURGE` în comanda `DROP TABLE`;
+    
+- Nu este posibil un rollback pe o comandă `DROP TABLE` cu clauza `PURGE` — deci se pierde definitiv tabelul:
+
+```sql
+DROP TABLE exemplu PURGE;
+```
+
+Pentru **ștergerea conținutului** unui tabel și păstrarea structurii acestuia se poate utiliza comanda:
+
+```sql
+TRUNCATE TABLE nume_tabel;
+```
+
+Obs: Fiind operație LDD, comanda `TRUNCATE` are efect definitiv. De asemenea, se resetează și numărătoarea pentru coloane de autoincrement.
+
+- `TRUNCATE` eliberează spațiul de memorie. `DELETE` nu face acest lucru;
+- `TRUNCATE` nu utilizează clauza `WHERE`, asa cum o face `DELETE`;
+- `TRUNCATE` este mai rapidă deoarece nu generează informații pentru `ROLLBACK` și nu activează declanșatori asociați operației de ștergere;
+- Dacă tabelul este „părintele” unei constrângeri de integritate referențială, el **nu poate fi trunchiat**;
+- Pentru a putea fi aplicată instrucțiunea `TRUNCATE`, constrângerea trebuie să fie mai întâi dezactivată;
+
+## Redenumirea tabelor
+
+Comanda `RENAME` permite redenumirea unui tabel, vizualizare sau secvență:
+
+```sql
+RENAME nume1_obiect TO nume2_obiect;
+```
+
+**Obs:**
+- În urma redenumirii sunt transferate automat constrângerile de integritate, indecșii și privilegiile asupra vechilor obiecte.
+- Sunt invalidate toate obiectele ce depind de obiectul redenumit, cum ar fi vizualizări, sinonime sau proceduri și funcții stocate.
+## Consultarea dicționarului datelor
+
+Informații despre tabelele create se găsesc în vizualizările:
+- `USER_TABLES` – informații complete despre tabelele utilizatorului.
+- `TAB` – informații de bază despre tabelele existente în schema utilizatorului.
+
+Informații despre constrângeri găsim în `USER_CONSTRAINTS`, iar despre coloanele implicate în constrângeri în `USER_CONS_COLUMNS`.
+
+## Exerciții 
+
+### Exercițiul 1 
+
