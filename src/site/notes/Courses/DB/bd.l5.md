@@ -374,5 +374,3 @@ MODIFY(
     SALARIU NUMBER(10,2)
     );
 ```
-
-
