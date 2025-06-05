@@ -347,3 +347,14 @@ INSERT ALL
                          'Inginer', 100, 10000, 10)
 SELECT * FROM DUAL;
 ```
+
+### Exercițiul 3
+
+Introduceți coloana comision in tabelul ANGAJATI_pnu. Coloana va avea tipul de date
+NUMBER(4,2).
+
+```sql
+ALTER TABLE ANGAJATI
+ADD (COMISION  NUMBER(4,2));
+```
+
