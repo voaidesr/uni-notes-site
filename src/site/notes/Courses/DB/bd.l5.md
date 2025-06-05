@@ -271,3 +271,65 @@ Informații despre constrângeri găsim în `USER_CONSTRAINTS`, iar despre coloa
 
 ### Exercițiul 1 
 
+Să se creeze tabelul `ANGAJATI_pnu` (pnu se alcătuiește din prima literă din prenume și primele două litere din numele studentului) corespunzător schemei relaționale:
+    
+```sql
+ANGAJATI_pnu (
+    cod_ang#     NUMBER(4),
+    nume         VARCHAR2(20),
+    prenume      VARCHAR2(20),
+    email        CHAR(15),
+    data_ang     DATE,
+    job          VARCHAR2(10),
+    cod_sef      NUMBER(4),
+    salariu      NUMBER(8,2),
+    cod_dep      NUMBER(2)
+)
+```
+
+În următoarele moduri:
+
+**a)** cu precizarea cheilor primare **la nivel de coloană** și a constrângerilor `NOT NULL` pentru coloanele `nume` și `salariu`. De asemenea, se presupune că:
+- valoarea implicită a coloanei `data_ang` este `SYSDATE`,
+- iar adresa de e-mail trebuie să aibă o valoare **unică**.
+**b)** cu precizarea cheii primare **la nivel de tabel** și a constrângerilor `NOT NULL` pentru coloanele `nume` și `salariu`.
+
+**Obs:** Nu pot exista două tabele cu același nume în cadrul unei scheme, deci recrearea unui tabel va fi precedată de suprimarea sa prin comanda:
+
+```sql
+DROP TABLE ANGAJATI_pnu;
+```
+
+*Soluție*
+
+```sql
+CREATE TABLE ANGAJATI
+(
+COD_ANG NUMBER(4) PRIMARY KEY,
+NUME VARCHAR2(20) NOT NULL,
+PRENUME VARCHAR2(20),
+EMAIL VARCHAR2(15) UNIQUE,
+DATA_ANG DATE DEFAULT SYSDATE,
+JOB VARCHAR2(10),
+COD_SEF NUMBER(4),
+SALARIU NUMBER(8,2) NOT NULL,
+COD_DEPARTAMENT NUMBER(2)
+);
+
+DROP TABLE ANGAJATI;
+
+CREATE TABLE ANGAJATI
+(
+    COD_ANG NUMBER(4),
+    NUME VARCHAR2(20) NOT NULL,
+    PRENUME VARCHAR2(20),
+    EMAIL VARCHAR2(15) UNIQUE,
+    DATA_ANG DATE DEFAULT SYSDATE,
+    JOB VARCHAR2(10),
+    COD_SEF NUMBER(4),
+    SALARIU NUMBER(8,2) NOT NULL,
+    COD_DEPARTAMENT NUMBER(2),
+    CONSTRAINT pk_angajat PRIMARY KEY (COD_ANG)
+);
+```
+
