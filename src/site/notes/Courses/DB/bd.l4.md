@@ -128,3 +128,92 @@ VALUES(300, 'Programare');
 ```
 
 Dacă se repetă instrucțiunea, returnează eroare -> încalcă constraint-ul de cheie primară unică.
+
+### Exercițiul 6 
+
+Să se insereze un angajat corespunzător departamentului introdus anterior în tabelul EMP_pnu, precizând valoarea NULL pentru coloanele a căror valoare nu este cunoscută la inserare (metoda implicită de inserare). Determinați ca efectele instrucțiunii să devină permanente.
+
+- Metoda implicită -> nu se scriu coloanele tabelului 
+
+```sql
+INSERT INTO EMP
+VALUES(10, null, 'Nume',
+       'email', null, SYSDATE,
+       'SA_REP', null, null,
+       null, 300);
+       
+COMMIT;
+```
+
+### Exercițiul 7
+
+Să se mai introducă un angajat corespunzător departamentului 300, precizând după numele
+tabelului lista coloanelor în care se introduc valori (metoda explicita de inserare). Se
+presupune că data angajării acestuia este cea curentă (SYSDATE). Salvaţi înregistrarea.
+
+```sql
+INSERT INTO EMP(EMPLOYEE_ID, LAST_NAME, EMAIL,
+                HIRE_DATE, JOB_ID, DEPARTMENT_ID)
+VALUES(12, 'Albec', 'alb',
+       SYSDATE, 'SA_CLERK', 300);
+```
+
+### Exercițiul 8 
+
+Creaţi un nou tabel, numit EMP1_PNU, care va avea aceeaşi structură ca şi EMPLOYEES, dar
+fara inregistrari (linii in tabel). Copiaţi în tabelul EMP1_PNU salariaţii (din tabelul EMPLOYEES)
+al căror comision depăşeşte 25% din salariu.
+
+```sql
+CREATE TABLE EMP1 AS SELECT * FROM EMPLOYEES;
+
+DELETE FROM EMP1; -- sterge totul din tabel
+
+INSERT INTO EMP1
+    SELECT * FROM EMPLOYEES WHERE COMMISSION_PCT > 0.25;
+```
+
+### Exercițiul 10
+
+Creaţi 2 tabele emp2_pnu şi emp3_pnu cu aceeaşi structură ca tabelul EMPLOYEES, dar
+fără înregistrări (acceptăm omiterea constrângerilor de integritate). Prin intermediul unei singure comenzi, copiaţi din tabelul EMPLOYEES:
+- în tabelul EMP1_PNU salariaţii care au salariul mai mic decât 5000;
+- în tabelul EMP2_PNU salariaţii care au salariul cuprins între 5000 şi 10000;
+- în tabelul EMP3_PNU salariaţii care au salariul mai mare decât 10000.
+Verificaţi rezultatele, apoi ştergeţi toate înregistrările din aceste tabele.
+
+```sql
+CREATE TABLE EMP2 AS SELECT * FROM EMPLOYEES;
+DELETE FROM EMP2;
+
+CREATE TABLE EMP3 AS SELECT * FROM EMPLOYEES;
+DELETE FROM EMP3;
+
+DELETE FROM EMP1;
+
+INSERT ALL
+    WHEN SALARY < 5000 THEN
+        INTO EMP1
+    WHEN SALARY BETWEEN 5000 AND 10000 THEN
+        INTO EMP2
+    WHEN SALARY > 10000 THEN
+        INTO EMP3
+SELECT * FROM EMPLOYEES;
+
+SELECT * FROM EMP1;
+SELECT * FROM EMP2;
+SELECT * FROM EMP3;
+```
+
+
+### Exercițiul 11 
+
+Să se creeze tabelul EMP0_PNU cu aceeaşi structură ca tabelul EMPLOYEES (fără
+constrângeri), dar fără înregistrari. Copiaţi din tabelul EMPLOYEES:
+- în tabelul EMP0_PNU salariaţii care lucrează în departamentul 80;
+- în tabelul EMP1_PNU salariaţii care au salariul mai mic decât 5000;
+- în tabelul EMP2_PNU salariaţii care au salariul cuprins între 5000 şi 10000;
+- în tabelul EMP3_PNU salariaţii care au salariul mai mare decât 10000.
+Dacă un salariat se încadrează în tabelul emp0_pnu atunci acesta nu va mai fi inserat şi în alt
+tabel (tabelul corespunzător salariului său).
+
