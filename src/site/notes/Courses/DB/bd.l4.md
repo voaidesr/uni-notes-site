@@ -2,7 +2,7 @@
 {"dg-publish":true,"permalink":"/courses/db/bd-l4/"}
 ---
 
-# Limbajul de manipulare al datelor (LMD) . Limbajul de control al datelor (LCD)
+# Limbajul de manipulare a datelor (LMD) . Limbajul de control al datelor (LCD)
 
 ## LMD 
 
