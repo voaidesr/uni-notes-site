@@ -358,3 +358,21 @@ ALTER TABLE ANGAJATI
 ADD (COMISION  NUMBER(4,2));
 ```
 
+### Exercițiul 5
+
+```sql
+ALTER TABLE ANGAJATI
+MODIFY (SALARIU DEFAULT 100);
+```
+
+### Exercițiul 6 
+
+```sql
+ALTER TABLE ANGAJATI
+MODIFY(
+    COMISION NUMBER(2,2),
+    SALARIU NUMBER(10,2)
+    );
+```
+
+
