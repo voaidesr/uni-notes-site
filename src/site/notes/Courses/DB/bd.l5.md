@@ -333,3 +333,17 @@ CREATE TABLE ANGAJATI
 );
 ```
 
+### Exercițiul 2 
+
+Inserează angajați. 
+
+```sql
+INSERT ALL
+    INTO ANGAJATI VALUES(100, 'Nume1', 'Prenume1',
+                         null, null, 'Director',
+                         null, 20000, 10)
+    INTO ANGAJATI VALUES(101, 'Nume1', 'Prenume2',
+                         'Nume2', TO_DATE('02-02-2024', 'DD-MM-YYYY'), 
+                         'Inginer', 100, 10000, 10)
+SELECT * FROM DUAL;
+```
