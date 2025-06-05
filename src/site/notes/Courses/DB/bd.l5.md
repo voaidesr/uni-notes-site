@@ -374,3 +374,61 @@ MODIFY(
     SALARIU NUMBER(10,2)
     );
 ```
+
+# Implementarea unei secvențe și a unei chei compuse 
+
+## Secvențe 
+
+Au următoarea sintaxă
+
+```sql
+CREATE SEQUENCE nume_secv
+START WITH 1         -- prima valoare generată
+INCREMENT BY 1       -- pasul de incrementare
+[MINVALUE n]         -- valoarea minimă permisă
+[MAXVALUE n]         -- valoarea maximă permisă
+[CYCLE | NOCYCLE]    -- revine la MINVALUE după MAXVALUE (sau nu)
+[CACHE n | NOCACHE]  -- câte valori prealocate în memorie
+[ORDER | NOORDER];   -- dacă păstrează ordinea cererilor (important la paralelism)
+```
+
+Exemplu, pentru generare de id
+
+```sql
+CREATE SEQUENCE seq_angajati
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+```
+
+Utilizare 
+
+```sql
+INSERT INTO ANGAJATI (ID, NUME) 
+VALUES (seq_angajati.NEXTVAL, 'Popescu');
+```
+
+## Cheie compusă 
+
+Exemplu
+
+```sql
+CREATE TABLE INSCRIERI (
+    ID_STUDENT NUMBER(4),
+    ID_CURS    NUMBER(4),
+    DATA_INSCR DATE DEFAULT SYSDATE,
+    CONSTRAINT pk_inscrieri PRIMARY KEY (ID_STUDENT, ID_CURS)
+);
+```
+
+- ambele coloane sunt not null (implicit) 
+
+Inserări 
+
+```
+(1,2)
+(1,3) -> valid
+(2,2) -> valid
+(1,2) -> invalid
+```
