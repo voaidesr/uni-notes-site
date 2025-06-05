@@ -217,3 +217,127 @@ constrângeri), dar fără înregistrari. Copiaţi din tabelul EMPLOYEES:
 Dacă un salariat se încadrează în tabelul emp0_pnu atunci acesta nu va mai fi inserat şi în alt
 tabel (tabelul corespunzător salariului său).
 
+```sql
+CREATE TABLE EMP0 AS SELECT * FROM EMPLOYEES;
+DELETE FROM EMP0;
+
+INSERT ALL
+    WHEN DEPARTMENT_ID = 80 THEN
+        INTO EMP0
+    WHEN SALARY < 5000 THEN
+        INTO EMP1
+    WHEN SALARY BETWEEN 5000 AND 10000 THEN
+        INTO EMP2
+    WHEN SALARY > 10000 THEN
+        INTO EMP3
+SELECT * FROM EMPLOYEES;
+```
+
+## Update
+
+Sintaxa simplificată este
+
+```sql
+UPDATE nume_tabel [alias]  
+SET col1 = expr1[, col2 = expr2]  
+[WHERE condiție];
+```
+
+Sau
+
+```sql
+UPDATE nume_tabel [alias]  
+SET (col1, col2, ...) = (subcerere)  
+[WHERE condiție];
+```
+
+Observații:
+- de obicei, pentru identificarea unei linii se folosește o condiție ce implică cheia primară;
+- dacă nu apare clauza `WHERE`, atunci sunt afectate toate liniile tabelului specificat;
+- cazurile în care instrucțiunea `UPDATE` nu poate fi executată sunt similare celor în care eșuează instrucțiunea `INSERT`. Acestea au fost menționate anterior.
+
+### Exercițiul 12 
+
+Măriţi salariul tuturor angajaţilor din tabelul EMP_PNU cu 5%. Vizualizati, iar apoi anulaţi
+modificările.
+
+```sql
+UPDATE EMP
+SET SALARY = SALARY * 1.05;
+```
+
+### Exercițiul 13
+
+Schimbaţi jobul tuturor salariaţilor din departamentul 80 care au comision, în 'SA_REP'.
+Anulaţi modificările.
+
+```sql
+UPDATE EMP
+SET JOB_ID = 'SA_REP'
+WHERE COMMISSION_PCT IS NOT NULL AND DEPARTMENT_ID = 80;
+```
+
+### Exercițiul 14 
+
+Să se promoveze Douglas Grant la manager în departamentul 20, având o creştere de salariu
+cu 1000$.
+
+```sql
+UPDATE DEPT
+SET MANAGER_ID = (
+    SELECT EMPLOYEE_ID
+    FROM EMP
+    WHERE FIRST_NAME = 'Douglas' AND LAST_NAME = 'Grant'
+)
+WHERE DEPARTMENT_ID = 20;
+
+UPDATE EMP
+SET SALARY = SALARY + 1000
+WHERE FIRST_NAME = 'Douglas' AND LAST_NAME = 'Grant';
+```
+
+## Delete 
+
+Sintaxa simplificată
+
+```sql
+DELETE FROM nume_tabel
+[WHERE conditie];
+```
+
+Dacă nu se specifică nicio condiție, atunci se șterg toate liniile 
+
+### Exercițiul 15
+
+Ştergeţi toate înregistrările din tabelul DEPT_PNU. Ce înregistrări se pot şterge? Anulaţi
+modificările.
+
+```sql
+DELETE FROM DEPT;
+```
+
+Oracle dă eroarea
+
+```
+ORA-02292: integrity constraint (SYSTEM.FK_EMP_DEPT) violated - child record found
+```
+
+`EMP` are cheie externă care referă la `DEPARTMENT_ID`. Dacă sunt angajați care aparțin unui departament, acel departament nu poate fi șters.
+
+Ștergeri posibile 
+
+```sql
+DELETE FROM DEPT_PNU
+WHERE DEPARTMENT_ID NOT IN (SELECT DEPARTMENT_ID FROM EMP);
+```
+
+### Exercițiul 16 
+
+Suprimaţi departamentele care nu au angajati. Anulaţi modificările.
+
+(chiar ștergerile posibile de mai sus). 
+
+## Exerciții generale 
+
+### Exercițiul 17 
+
