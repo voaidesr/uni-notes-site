@@ -112,3 +112,178 @@ $\operatorname{rg} A = k \iff$ Există un minor de ordin $k$ nenul și toți min
 
 Există $(m-k)(n-k)$ minori de ordinul $k+1$ care îl conțin pe $\Delta_k$. (am optimizat algoritmul)
 
+### Exercițiul 1
+
+Fie matricea $A \in M_3(\mathbb{R})$ definită prin
+
+$$
+A = \begin{pmatrix}
+ a & 1 & 1 \\
+ 1 & a & 1 \\
+ 1 & 1 & a
+\end{pmatrix}.
+$$
+
+Determinați $\operatorname{rang}A$ în funcție de $a \in \mathbb{R}$.
+
+**Soluție**
+
+>[!tip]
+>$A$ e pătratică $\implies$ mare $\to$ mic.
+
+Calculăm determinantul:
+
+$$
+\Delta = \det(A)
+= \begin{vmatrix}
+ a & 1 & 1 \\
+ 1 & a & 1 \\
+ 1 & 1 & a
+\end{vmatrix}.
+$$
+
+Adunăm liniile:
+
+$$
+L_1' = L_1 + L_2 + L_3
+\quad \Rightarrow \quad
+\Delta = \begin{vmatrix}
+ a+2 & a+2 & a+2 \\
+ 1 & a & 1 \\
+ 1 & 1 & a
+\end{vmatrix}
+= (a+2)
+\begin{vmatrix}
+ 1 & 1 & 1 \\
+ 1 & a & 1 \\
+ 1 & 1 & a
+\end{vmatrix}.
+$$
+Scădem prima linie din celelalte două:
+
+$$
+L_2' = L_2 - L_1,\quad L_3' = L_3 - L_1
+\quad \Rightarrow \quad
+\begin{vmatrix}
+ 1 & 1 & 1 \\
+ 0 & a-1 & 0 \\
+ 0 & 0 & a-1
+\end{vmatrix}
+= (a-1)^2.
+$$
+
+Prin urmare:
+
+$$
+\Delta = (a+2)(a-1)^2.
+$$
+
+>[!note] Determinantul se anulează pentru $a = -2$ și $a = 1$.
+
+Din această expresie deducem:
+
+* Dacă $a \neq -2$ și $a \neq 1$, atunci $\Delta \neq 0$, deci $\operatorname{rang} A = 3$.
+* Dacă $a = 1$, atunci $A = \begin{pmatrix} 1 & 1 & 1\\1&1&1\\1&1&1\end{pmatrix}$, deci $\operatorname{rang} A = 1$.
+* Dacă $a = -2$, se verifică că $\operatorname{rang} A = 2$.
+
+Astfel:
+
+$$
+\operatorname{rang} A =
+\begin{cases}
+ 3, & a \neq -2,\,1,\\
+ 1, & a = 1,\\
+ 2, & a = -2.
+\end{cases}
+$$
+### Exercițiul 2
+
+>[!tip]
+>$A$ nu este pătratică $\implies$ mix $\to$ mare. 
+
+Fie $A$, aflați rangul
+$$
+A = \begin{pmatrix}
+1 & 1 &a & 1\\
+0 & 1 & -1 &2\\
+6 & 4&8&3
+\end{pmatrix}
+$$
+*Soluție*
+
+$$
+\begin{aligned}
+&\Delta_1 =  1 \neq 0\\\\
+&\Delta_2 = \begin{vmatrix} 
+			1 & 1\\
+			0 & -1
+			\end{vmatrix} = -1 \neq 0\\\\
+&\Delta_3 = 
+\begin{vmatrix}
+1&1&1\\
+0&1&2\\
+6&4&3
+\end{vmatrix} \overset{l_3'\; = \; l_3 - 6l_1}{=} 
+\begin{vmatrix}
+1&1&1\\
+0&1&2\\
+0&-2&-3
+\end{vmatrix} = 
+\begin{vmatrix}
+1 & 2 \\
+-2 & -3
+\end{vmatrix} = 1 \neq 0
+\end{aligned} 
+$$
+Deci $\operatorname{rang} A = 3$.
+### Exercițiul 3: Rangul matricilor care satisfac o ecuație polinomială
+
+Fie $A \in M_n(\mathbb{R})$ astfel încât
+
+$$
+A^3 - A - I_n = 0_n.
+$$
+
+**a)** Determinați $\operatorname{rang}A$.
+**b)** Determinați $\operatorname{rang}(A + I_n)$.
+
+**Soluție**
+
+**a)** Din ecuație:
+
+$$
+A(A^2 - I_n) = I_n
+\quad\Longrightarrow\quad
+\det(A)\cdot\det(A^2 - I_n) = \det(I_n) = 1
+\;
+\Longrightarrow\;
+\det(A) \neq 0,
+$$
+
+deci $A$ este inversibilă și
+
+$$
+\operatorname{rang}A = n.
+$$
+
+**b)** Observăm că
+
+$$
+(A - I_n)(A + I_n) = A^2 - I_n
+\quad\Longrightarrow\quad
+A(A - I_n)(A + I_n) = I_n,
+$$
+
+de unde, aplicând determinantul,
+
+$$
+\det(A)\cdot\det(A - I_n)\cdot\det(A + I_n) = 1
+\;\Longrightarrow\;
+\det(A + I_n) \neq 0,
+$$
+
+astfel și $A + I_n$ este inversibilă, deci
+
+$$
+\operatorname{rang}(A + I_n) = n.
+$$
