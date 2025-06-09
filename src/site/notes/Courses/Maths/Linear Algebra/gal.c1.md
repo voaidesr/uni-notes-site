@@ -282,7 +282,7 @@ $$
 \det(A + I_n) \neq 0,
 $$
 
-astfel și $A + I_n$ este inversibilă, deci
+astfel și $A + I_n$ este inversabilă, deci
 
 $$
 \operatorname{rang}(A + I_n) = n.
