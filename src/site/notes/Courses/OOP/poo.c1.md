@@ -6,11 +6,11 @@
 ## Completări aduse de C++
 
 ```ad-index
-[[Lesson 1#Supraîncărcarea funcțiilor|Supraîncărcarea funcțiilor]]
-[[Lesson 1#Pointeri|Pointeri]]
-[[Lesson 1#Const|Const]]
-[[Lesson 1#Tipul referință|Referință]]
-[[Lesson 1#Principiile POO|Principiile POO]]
+[[poo.c1#Supraîncărcarea funcțiilor|Supraîncărcarea funcțiilor]]
+[[poo.c1#Pointeri|Pointeri]]
+[[poo.c1#Const|Const]]
+[[poo.c1#Tipul referință|Referință]]
+[[poo.c1#Principiile POO|Principiile POO]]
 ```
 
 #polimorfism
