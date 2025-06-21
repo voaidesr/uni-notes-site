@@ -281,3 +281,154 @@ C15 CC15 D15
 D0 D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 
 ```
 
+## Containere asociative
+
+### Set 
+
+- mulțime, stochează elemente distincte 
+- se folosește arbore binar de căutare 
+
+### Map 
+
+ - dicționar (cheie, valoare)
+ - **multimap** poate avea chei duplicate, map nu 
+ 
+```cpp 
+template <class Key, class T, class Comp = less<Key>, class Allocator =  allocator <pair<const Key,T> > class map
+```
+
+- `Key` = tipul cheii
+- `T` = tipul stocat 
+- `Comp` = funcție care compară două chei
+
+>[!tip] Inserarea se face ordonat după chei
+
+#### Tipuri de constructori 
+
+```cpp 
+map<char, int> m; // map cu zero elemente 
+
+map<char, int> m2(m); // copiere 
+
+map<char, int> m3(m.begin(), m.end()); // range constructor
+```
+
+Exemplu utilizare iterator: 
+
+```cpp 
+int main() {
+    map<int, int> m;
+    m.insert(pair<int, int>(1,2));
+    m.insert(pair<int, int>(3, 4));
+    m.insert(pair<int, int>(5, 6));
+    m.insert(pair<int, int>(7, 8));
+    m.insert(pair<int, int>(9, 10));
+    map<int, int>::iterator p;
+    for(p = m.begin(); p != m.end(); p++)
+        cout << p->first << " " << p->second << endl;
+}
+```
+### Bitset 
+
+- container special pentru stocat biți 
+
+#### Iterator 
+
+- concept fundamental în STL 
+- gestionează o poziție curentă în container 
+- suportă traversare `++`, `--` și dereferențiere `*p`. 
+
+>[!warning]
+>[[Courses/OOP/poo.c10#Adaptor de container\|Adaptoarele de containere]] nu oferă iteratori.
+
+De mai multe tipuri 
+
+- reverse iterator 
+```cpp 
+vector<int>::reverse_iterator r;
+for (r = v.rbegin(); r != v.rend(); r++)
+	cout << *r << " ";
+```
+
+-  iterator input/output
+- forward iterators, bidirectional iterators, random access iterators 
+
+## Algorithm 
+
+Colecție de funcții template care pot fi folosite cu iteratori. 
+
+Exemple: 
+- `accumulate` -> calculează suma elementelor 
+- `copy` -> copiază
+- `sort` -> sortează folosind `operator >` 
+- `sort(it_begin, it_end, comp)` -> sortare cu o funcție de comparare 
+- `for_each(it_beg, it_end, foo)` -> execută funcția `foo` pentru fiecare obiect peste care trece iteratorul 
+- `transform(it_beg, it_end, it_beg2, foo)`) -> aplică funcția pentru fiecare membru din secvență și memorează în secvența rezultat 
+
+### Lambda expressions 
+
+- apar în versiunea C++11 și permit definirea unei funcții local 
+
+Sintaxa: 
+
+```cpp 
+[capture](parameters) mutable exception -> return type {body}
+```
+
+- `capture` - partea introductivă, spune compilatorului că urmează o expresie lambda. Aici se specifică ce variabile (din contextul exterior) și în ce mod (valoare sau referință) se copiază în blocul în care expresia lambda e definită.
+
+```cpp 
+int a = 1, b = 2, c = 3;
+auto k = [a, &b](int x) {
+	return a + b + x;
+} // a e copiat, b se transmite prin referinta, c nu e accesibil
+
+auto k1 = [=](int x) {
+	return a * x;
+} // copiaza a 
+
+auto k2 = [&](int x) { 
+	return b = x*a; 
+} // a, b se transmite prin referinta 
+```
+
+>[!info] capture
+>Singurele lucruri admise în capture sunt nume de variabile, `&`, `=`  și `this`.
+
+>[!warning]
+>Variabilele utilizate trebuie declarate în funcție sau în capture. 
+
+```cpp 
+int c = 2;
+auto k = [](int x) {
+	return c * x; // eroare, c nu poate fi accesat
+}
+```
+
+>[!danger] Alte erori 
+> - Dacă a fost declarat deja `&`, nu mai pot fi utilizate alte variabile cu `&` în față. 
+> - Dacă conține `=` by default, nu mai pot fi utilizate alte argumente tot prin valoare.
+> ```cpp 
+> int i = 2;
+> [&, i]{}; // ok 
+> [&, &i]{}; // eroare
+> [=, this]{}; // eroare
+> [=, *this] {}; // ok
+> [i, i]{}; // eroare, se repeta i
+> ```
+
+- `parameters` - parametrii expresiei
+- `mutable` (opțional) -  permite modificarea parametrilor transmiși prin valoare
+- `exception` (opțional) - a se utiliza `noexcept` dacă nu aruncă nicio excepție
+- `return-type` (opțional) - tipul la care se evaluează expresia lambda, poate fi dedusă de compilator
+- `body`
+
+## Deducerea tipului în mod automat 
+
+### Auto 
+
+Tipul poate fi dedus din inițializarea variabilei respective. În cazul funcțiilor, dacă tipul inițializat este `auto`, este evaluat din expresia returnată la runtime. 
+
+>[!danger] Eroare 
+>Variabilele `auto` trebuie inițializate, altfel eroare. 
+
