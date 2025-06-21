@@ -432,3 +432,10 @@ Tipul poate fi dedus din inițializarea variabilei respective. În cazul funcți
 >[!danger] Eroare 
 >Variabilele `auto` trebuie inițializate, altfel eroare. 
 
+### Decltype
+
+Returnează tipul unei expresii fără a o evalua. 
+
+```cpp 
+decltype(expression) name;
+```
