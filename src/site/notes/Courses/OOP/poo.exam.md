@@ -362,6 +362,7 @@ int main()
 >`ob` este `*p2`, are este un obiect de tip `B`, având `x` protected, deci inaccesibil. (chiar dacă `p1` este obiect derivat, el are acces la datele protected doar din bază, nu a oricărui obiect de tip derivat egal cu baza)
 >
 >Modificări posibile: 
+>- adăugăm `friend class D;` în interiorul lui `B` (cred că e cel mai bine așa)
 >- schimbăm `protected` în `public` (vom avea `x` public).
 >- adăugăm getter pentru `x` și folosim acea funcție.
 
