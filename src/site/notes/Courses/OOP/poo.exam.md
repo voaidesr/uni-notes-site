@@ -222,3 +222,56 @@ int main()
 
 *Soluție*
 
+**Compilează**. Afișează 
+
+```
+7
+7
+7
+```
+
+>[!info] Explicație
+>Problema [[Courses/OOP/poo.c6#Moștenirea în diamant\|diamantului]] este evitată prin moștenirea virtual, deci compilează.
+>
+>Se aplică [[Courses/OOP/poo.c9#Run-time type identification (RTTI)\|RTTI]] pentru determinarea outcome-ului funcțiilor.
+>
+>B este o clasă polimorfică (are  o funcție virtuală `get_i`). Fiecare `override` al acestei funcții este virtual, chiar dacă nu mai este pus cuvântul cheie `virtual`. 
+>
+>Deci, în cazul `B* o = new MM()` , este cunoscut la runtime că tipul real al lui o este `MM`, deci este apelat get_i pentru tipul `MM`. 
+>
+>La fel și pentru cast-ul la `D` și la `MM`. 
+
+### Ex. 6 
+
+```cpp 
+#include <iostream>
+using namespace std;
+class B {
+    int x;
+
+public:
+    B(int i = 7) { x = i; }
+    int get_x() { return x; }
+    operator int() { return x; }
+};
+class D : public B {
+public:
+    D(int i = -12)
+        : B(i)
+    {
+    }
+    D operator+(D a) { return get_x() + a.get_x() + 1; }
+};
+int main()
+{
+    D a;
+    int b = 18;
+    b += a;
+    cout << b;
+    return 0;
+}
+```
+
+*Soluție*
+
+
