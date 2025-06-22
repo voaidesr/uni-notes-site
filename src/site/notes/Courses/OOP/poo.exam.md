@@ -818,3 +818,185 @@ int main()
 a + 5 * sizeof(int)
 ```
 
+### Ex. 19 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class B {
+protected:
+    int x;
+
+public:
+    B(int i = 12) { x = i; }
+    virtual B f(B ob) { return x + ob.x + 1; }
+    void afisare() { cout << x; }
+};
+class D : public B {
+public:
+    D(int i = -15)
+        : B(i - 1)
+    {
+        x++;
+    }
+    B f(B ob) { return x - 2; }
+};
+int main()
+{
+    B *p1 = new D, *p2 = new B, *p3 = new B(p1->f(*p2));
+    p3->afisare();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează.** Afișează `-17`.
+
+### Ex. 20 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+struct B {
+    int i;
+
+public:
+    B() { i = 1; }
+    virtual int get_i() { return i; }
+} a;
+class D : virtual public B {
+    int j;
+
+public:
+    D() { j = 2; }
+    int get_i() { return B::get_i() + j; }
+};
+class D2 : virtual public B {
+    int j2;
+
+public:
+    D2() { j2 = 3; }
+    int get_i() { return B::get_i() + j2; }
+};
+class MM : public D2, public D {
+    int x;
+
+public:
+    MM() { x = D::get_i() + D2::get_i(); }
+    int get_i() { return x; }
+};
+{
+    MM b;
+}
+int main()
+{
+    B* o = new MM();
+    cout << o->get_i() << "\n";
+    MM* p = dynamic_cast<MM*>(o);
+    if (p)
+        cout << p->get_i() << "\n";
+    D* p2 = dynamic_cast<D*>(o);
+    if (p2)
+        cout << p2->get_i() << "\n";
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează.**
+
+>[!info] Explicație
+>Nu poți avea blocuri `{}` în afara unei funcții. Putem elimina `{MM b;}`
+
+### Ex. 21
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    int x;
+    A(int i = -13) { x = i; }
+};
+class B : virtual public A {
+public:
+    B(int i = -15) { x = i; }
+};
+class C : virtual public A {
+public:
+    C(int i = -17) { x = i; }
+};
+class D : virtual public A {
+public:
+    D(int i = -29) { x = i; }
+};
+class E : public B, public D, public C {
+public:
+    int y;
+    E(int i, int j)
+        : D(i)
+        , B(j)
+    {
+        y = x + i + j;
+    }
+    E(E& ob) { y = ob.x - ob.y; }
+};
+int main()
+{
+    E e1(5, 10), e2 = e1;
+    cout << e2.y;
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează.** Afișează `-15`.
+
+### Ex. 20 
+
+```cpp 
+#include <iostream>
+using namespace std;
+#include <typeinfo>
+
+class B {
+    int i;
+
+public:
+    B(int x) { i = x + 1; }
+    int get_i() { return i; }
+};
+class D : public B {
+    int j;
+
+public:
+    D()
+        : B(1)
+    {
+        j = i + 2;
+    }
+    int get_j() { return j; }
+};
+int main()
+{
+    B* p = new D[10];
+    cout << p->get_i();
+    if (typeid((B*)p).name() == "D*")
+        cout << ((D*)p)->get_j();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează.**
+
+>[!info] Explicație 
+>`i` e privat, deci nu poate fi accesat în `j = i + 2`. Putem să îl facem protected. 
+
