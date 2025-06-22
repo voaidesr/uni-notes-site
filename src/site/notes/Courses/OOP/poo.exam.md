@@ -274,4 +274,155 @@ int main()
 
 *Soluție*
 
+**Compilează.** Afișează `6`
+
+>[!info] Explicație 
+>Esențială este existența lui `operator int() {return x;}`, care este operatorul de conversie a unui obiect de tip `B` la `int`. 
+>
+>`+=` este un operator diferit de `+`, deci nu se aplică funcția definită în D pentru `+`.
+>
+>`b+=a` funcționează doar pentru că `a` are, din bază, abilitatea de a fi convertit la `int`. Se face conversie implicită și `b += a` va face ca `b = 18 + (-12) = 6`.
+
+### Ex. 7 
+
+```cpp 
+#include <iostream>
+using namespace std;
+#include <typeinfo>
+class B {
+    int i;
+
+public:
+    B() { i = 1; }
+    int get_i() { return i; }
+};
+class D : B {
+    int j;
+
+public:
+    D() { j = 2; }
+    int get_j() { return j; }
+};
+int main()
+{
+    B* p = new D;
+    cout << p->get_i();
+    if (typeid((B*)p).name() == "D*")
+        cout << ((D*)p)->get_j();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează**. 
+
+>[!info] Explicație 
+>`B* p = new D` nu funcționează decât în cazul moștenirii publice. Aici, moștenirea este privată (implicit), deci codul nu va compila. 
+>
+>Peste suficient să adăugăm `public` la moștenire pentru a compila. 
+
+### Ex. 8 
+
+```cpp 
+#include <iostream>
+using namespace std;
+class B {
+protected:
+    int x;
+
+public:
+    B(int i = 28) { x = i; }
+    virtual B f(B ob) { return x + ob.x + 1; }
+    void afisare() { cout << x; }
+};
+class D : public B {
+public:
+    D(int i = -32)
+        : B(i)
+    {
+    }
+    B f(B ob) { return x + ob.x - 1; }
+};
+int main()
+{
+    B *p1 = new D, *p2 = new B, *p3 = new B(p1->f(*p2));
+    p3->afisare();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează.**
+
+>[!info] Explicație 
+>Neintuitiv, `p1->f(*p2)` pare ok, pentru că ar returna un `B` care poate fi convertit implicit la `int`. Problem apare, în schimb, la `return x + ob.x - 1`. 
+>
+>`ob` este `*p2`, are este un obiect de tip `B`, având `x` protected, deci inaccesibil. (chiar dacă `p1` este obiect derivat, el are acces la datele protected doar din bază, nu a oricărui obiect de tip derivat egal cu baza)
+>
+>Modificări posibile: 
+>- schimbăm `protected` în `public` (vom avea `x` public).
+>- adăugăm getter pentru `x` și folosim acea funcție.
+
+### Ex. 9
+
+```cpp 
+#include <iostream>
+using namespace std;
+class B {
+protected:
+    static int x;
+    int i;
+
+public:
+    B()
+    {
+        x++;
+        i = 1;
+    }
+    ~B() { x--; }
+    static int get_x() { return x; }
+    int get_i() { return i; }
+};
+int B::x;
+class D : public B {
+public:
+    D() { x++; }
+    ~D() { x--; }
+};
+int f(B* q)
+{
+    return (q->get_x()) + 1;
+}
+int main()
+{
+    B* p = new B[10];
+    cout << f(p);
+    delete[] p;
+    p = new D;
+    cout << f(p);
+    delete p;
+    cout << D::get_x();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează.** Va afișa `1131`.
+
+>[!info] Explicație 
+>- Avem variabilă statică care este definită `int B::x;`. Ea nu este inițializată cu valoare, deci compilatorul o inițializează cu valoarea `0`. 
+>- `new B[10]` apelează constructorul lui B de 10 ori, deci `x = 10`.
+>- `f(p)` va afișa $10 + 1 = 11$ 
+>- `delete[] p` apelează destructorul de 10 ori, deci `x = 0`
+>- `new D` apelează constructorul pentru bază și pentru derivată, deci vom avea de 2 ori `x++`. Deci `x = 2`.
+>- `f(p)` va afișa $2 + 1 = 3$
+>- Se apelează doar destructorul pentru D, deci `x` scade doar o dată. 
+>- `x = 1`, deci se va afișa doar 1
+>- nu sunt spații și newlines, deci vom avea `1131`
+
+### Ex. 10 
+
 
