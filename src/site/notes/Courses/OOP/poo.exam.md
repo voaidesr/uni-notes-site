@@ -95,7 +95,7 @@ int main()
 
 **Nu compilează**. Avem variabilă statică neinițializată.
 
-Pentru a corecta, e suficient să adăugăm, după declararea clasei:
+Pentru a corecta e suficient să adăugăm, după declararea clasei:
 
 ```cpp 
 int A::x = 0;
