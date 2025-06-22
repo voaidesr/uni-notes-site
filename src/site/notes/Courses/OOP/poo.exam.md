@@ -552,3 +552,269 @@ int main()
 > 
 > Este suficient să facem constructorul existent într-un constructor cu valoare implicită `cls(int i = 0)`
 
+### Ex. 13
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+int f(int y)
+{
+    try
+    {
+        if (y > 0)
+            throw y;
+    }
+    catch (int i)
+    {
+        throw;
+    }
+    return y - 2;
+}
+int f(int y, int z)
+{
+    try
+    {
+        if (y < z)
+            throw z - y;
+    }
+    catch (int i)
+    {
+        throw;
+    }
+    return y + 2;
+}
+float f(float &y)
+{
+    cout << " y este referinta";
+    return (float)y / 2;
+}
+int main()
+{
+    int x;
+    try
+    {
+        cout << "Da-mi un numar par: ";
+        cin >> x; //se va citi numarul 2
+        if (x % 2)
+            x = f(x, 0);
+        else
+            x = f(x);
+        cout << "Numarul " << x << " e bun!" << endl;
+    }
+    catch (int i)
+    {
+        cout << "Numarul " << i << " nu e bun!" << endl;
+    }
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează**. Afișează
+
+```
+Da-mi un numar par: Numarul 2 nu e bun!
+```
+
+>[!info] Explicație 
+>`x = 2`, este apelat `f(2)`. Pentru ca `2>0` se face `throw 2`. Este prins, dar se face `throw` din 2, e prins in blocul de `catch` din main.
+
+### Exercițiul 14 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class A {
+    int x;
+
+public:
+    A(int i) { x = i; }
+    int get_x() { return x; }
+    int& set_x(int i) { x = i; }
+    A operator=(A a1)
+    {
+        set_x(a1.get_x());
+        return a1;
+    }
+};
+class B : public A {
+    int y;
+
+public:
+    B(int i)
+        : A(i)
+    {
+        y = i;
+    }
+    void afisare() { cout << y; }
+};
+int main()
+{
+    B a(112), b, *c;
+    cout << (b = a).get_x();
+    (c = &a)->afisare();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează**.
+
+>[!info] Explicație 
+>Nu există constructor fără parametri în B, pentru a construi `b`. E suficient să adăugăm `B(int i = 0)` pentru a merge.
+
+### Ex. 15
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+struct cls {
+    int x;
+
+public:
+    int set_x(int i)
+    {
+        int y = x;
+        x = i;
+        return x;
+    }
+    int get_x() { return x; }
+};
+int main()
+{
+    cls* p = new cls[100];
+    int i = 0;
+    for (; i < 50; i++)
+        p[i].set_x(i);
+    for (i = 5; i < 20; i++)
+        cout << p[i].get_x() << " ";
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează**. Afișează
+
+```
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+```
+
+>[!info] Explicație
+>Avem `struct`, deci putem scrie `new cls[100]` fără probleme. 
+
+### Ex 16. 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class A {
+protected:
+    int x;
+
+public:
+    A(int i = 14) { x = i; }
+};
+class B : A {
+public:
+    B()
+        : A(2)
+    {
+    }
+    B(B& b) { x = b.x - 14; }
+    void afisare() { cout << x; }
+};
+int main()
+{
+    B b1, b2(b1);
+    b2.afisare();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează**. Afișează `-12`.
+
+>[!info] Explicație 
+>Avem `protected`, deci `x` e accesibil în B. Moștenirea `private` ar avea efect doar la următoarea moștenire din B. 
+>
+>La copierea `b2(b1)` se apelează constructorul de copiere și `b2` va avea `x = 2 - 14 = -12`.
+
+### Ex. 17
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+protected:
+    static int x;
+
+public:
+    A(int i = 0) { x = i; }
+    virtual A schimb() { return (7 - x); }
+};
+class B : public A {
+public:
+    B(int i = 0) { x = i; }
+    void afisare() { cout << x; }
+};
+int A::x = 5;
+int main()
+{
+    A* p1 = new B(18);
+    *p1 = p1->schimb();
+    ((B*)p1)->afisare();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează**. Afișează `-11`.
+
+>[!info] Explicație
+>`virtual A schimb() { return (7 - x);` va face conversia de la int la `A`. Avem `7 - 18 = -11`. Deci `p1` va pointa la un obiect cu `x = -11`.
+
+### Ex. 18 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+template <class T, class U>
+T fun(T x, U y)
+{
+    return x + y;
+}
+int fun(int x, int y)
+{
+    return x - y;
+}
+int fun(int x)
+{
+    return x + 1;
+}
+int main()
+{
+    int *a = new int(10), b(5);
+    cout << fun(a, b);
+    return 0;
+}
+```
+
+*Soluție* - asemănător cu [[Courses/OOP/poo.exam#Ex. 10\|10]].
+
+**Compilează**. De data asta afișează o adresă
+
+```
+a + 5 * sizeof(int)
+```
+
