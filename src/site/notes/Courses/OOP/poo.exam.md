@@ -357,7 +357,7 @@ int main()
 **Nu compilează.**
 
 >[!info] Explicație 
->Neintuitiv, `p1->f(*p2)` pare ok, pentru că ar returna un `B` care poate fi convertit implicit la `int`. Problem apare, în schimb, la `return x + ob.x - 1`. 
+>Neintuitiv, `p1->f(*p2)` pare ok, pentru că ar returna un `B` care poate fi convertit implicit la `int`. Problema apare, în schimb, la `return x + ob.x - 1`. 
 >
 >`ob` este `*p2`, are este un obiect de tip `B`, având `x` protected, deci inaccesibil. (chiar dacă `p1` este obiect derivat, el are acces la datele protected doar din bază, nu a oricărui obiect de tip derivat egal cu baza)
 >
