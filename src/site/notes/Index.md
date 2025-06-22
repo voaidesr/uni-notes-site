@@ -15,8 +15,8 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 >- [[Courses/OOP/poo.c8\|Curs 8]]
 >- [[Courses/OOP/poo.c9\|Curs 9]]
 >- [[Courses/OOP/poo.c10\|Curs 10]]
->- [[poo.c11\|Curs 11]]
->- [[poo.c12\|Curs 12]]
+>- [[Courses/OOP/poo.c11\|Curs 11]]
+>- [[Courses/OOP/poo.c12\|Curs 12]]
 
 >[!proof]- 2. Structuri de Date
 
