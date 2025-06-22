@@ -426,4 +426,129 @@ int main()
 
 ### Ex. 10 
 
+```cpp
+#include <iostream>
+using namespace std;
+template <class T, class U>
+T f(T x, U y)
+{
+    return x + y;
+}
+int f(int x, int y)
+{
+    return x - y;
+}
+int main()
+{
+    int *a = new int(3), b(23);
+    cout << *f(a, b);
+    return 0;
+}
+```
+
+*Soluție*
+
+**Compilează.** Afișează 0, garbage sau dă runtime error. 
+
+>[!info] Explicație 
+>- `a` este `int*`, iar `b` este `int`. Nu se face conversie de la `int*` la `int`, deci funcția `f(a, b)` va intra pe template.
+>- Va fi adunat un `int` la un pointer. Prin aritmetică pe pointeri va fi returnat un pointer la `23` de `sizeof(int)` de locul pointat de `a`. 
+>- `*f(a,b)` diferențiază acel pointer și dă o valoare garbage (de obicei 0).
+
+### Ex. 11
+
+```cpp 
+#include <iostream>
+using namespace std;
+class A {
+    int x;
+
+public:
+    A(int i = 0) { x = i; }
+    A operator+(const A& a) { return x + a.x; }
+    template <class T>
+    ostream& operator<<(ostream&);
+};
+template <class T>
+ostream& A::operator<<(ostream& o)
+{
+    o << x;
+    return o;
+}
+int main()
+{
+    A a1(33), a2(-21);
+    cout << a1 + a2;
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează.**
+
+>[!info] Explicație
+>Nu compilează pentru că operatorul `<<`. Pentru a executa `cout << a1 + a2` (Argumentele ar trebui să fie, atunci, `ostream& o, const A& a`.
+>- Este funcție membru, cu singurul argument `ostream& 0`
+>- Deci trebuie apelat ca `obA.operator<<(ostream& o)`
+>- Adică `obA << ostream`
+>- Deci trebuie să schimbăm în `(a1 + a2)<<cout`. 
+>- Nu merge pentru că template-ul nu poate fi particularizat, așa că eliminăm și `template <class T>`
+
+În același sens, nici 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+template <typename T>
+void f() {
+    cout << "a";
+}
+
+int main() {
+    f();
+}
+```
+
+Nu compilează. 
+
+## Ex. 12 
+
+```cpp 
+#include <iostream>
+using namespace std;
+class cls {
+    int x;
+
+public:
+    cls(int i) { x = i; }
+    int set_x(int i)
+    {
+        int y = x;
+        x = i;
+        return y;
+    }
+    int get_x() { return x; }
+};
+int main()
+{
+    cls* p = new cls[10];
+    int i = 0;
+    for (; i < 10; i++)
+        p[i].set_x(i);
+    for (i = 0; i < 10; i++)
+        cout << p[i].get_x();
+    return 0;
+}
+```
+
+*Soluție*
+
+**Nu compilează.**
+
+>[!info] Explicație 
+> Problema vine de la `new cls[10]` care echivalează cu crearea a 10 obiecte `cls` prin constructorul fără parametri. Nu există un astfel de constructor, deci nu compilează.
+> 
+> Este suficient să facem constructorul existent într-un constructor cu valoare implicită `cls(int i = 0)`
 
