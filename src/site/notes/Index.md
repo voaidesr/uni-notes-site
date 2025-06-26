@@ -19,7 +19,9 @@ Notițe din cadrul cursurilor FMI, informatică, seria 15, începând cu Anul I,
 >- [[Courses/OOP/poo.c12\|Curs 12]]
 >- [[Courses/OOP/poo.exam\|Util Examen]]
 
->[!proof]- 2. Structuri de Date
+>[!proof]- 2. Structuri de Date 
+>- [[Courses/DSA/rezolvari_2024_p5\|Rezolvări Examen 2024 - Partea 5]]
+
 
 >[!proof]- 3. Baze de Date
 >>[!hint]- Laboratoare
