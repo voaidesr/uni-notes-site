@@ -123,6 +123,8 @@ g(x, e_n) = 0
 $$
 Sistemul este un SLO. Are soluție unică nenulă  $\Leftrightarrow$ $\operatorname{det}((g_{ij})_{i,j}) = \operatorname{det} G \neq 0$
 
+##### Forme pozitiv definite
+
 >[!definition]
 > Fie $Q : V \to \mathbb{R}$ fromă pătratică reală 
 > Se numește pozitiv definită dacă și numai dacă:

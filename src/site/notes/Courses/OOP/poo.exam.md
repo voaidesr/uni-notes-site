@@ -1000,3 +1000,135 @@ int main()
 >[!info] Explicație 
 >`i` e privat, deci nu poate fi accesat în `j = i + 2`. Putem să îl facem protected. 
 
+## Examen CTI, sem I 2024-2025
+
+### Ex. 1 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class C
+{
+    int x;
+public:
+    C(int x = 0) : x(x) {}
+    operator int()
+    {
+        return x;
+    }
+};
+
+int main()
+{
+    C *arr = new C[12](2020);
+    for (int i = 1; i < 12; i++)
+        cout << arr0;
+    return 0;
+}
+```
+
+*Soluție*
+
+În C++98 nu compilează. Nu poate exista inițializare pentru un array.
+
+În C++11> există inițializare cu `{}`. Dar tot nu compilează. 
+
+Nu există inițializare cu paranteze. (deși mie îmi compilează cu c++20, dar n-am găsit nicio resursă care să-mi spună de ce).
+
+Exemplu:
+
+```cpp 
+C *arr = new C[12] {2020}; // ar initializa primul element
+C *arr2 = new C[12] {1, 2, 3} // ar initializa primele trei elemente
+```
+
+## Ex 2. 
+
+Menționați adevărat/fals. 
+
+1. Operatorii `sizeof()`, `::`, și `?` pot fi suprascriși doar ca funcții membre.
+**Fals** -> nu pot fi suprascriși deloc.
+
+2. Se poate schimba precedența operatorilor, dar nu se poate schimba numărul de operanzi. 
+**Fals** -> nu se poate schimba precedența operatorilor. 
+
+3. Clasele derivate pot să redefinească operatorii.
+**Adevărat**.
+
+4. Operatorul de atribuire poate fi supraîncărcat numai ca funcție prieten. 
+**Fals**.
+
+5. Funcțiile operator nu pot întoarce referințe.
+**Fals** -> exemplu, `operator[]`.
+
+## Ex. 3 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class B {
+public:
+    B(){cout<< "B";}
+    virtual ~B() {cout << "~B"; }
+};
+
+struct C : B{
+public:
+    C() {cout<<"C";}
+    ~C() {cout <<"~C";}
+};
+
+class D : C{
+public:
+    D() {cout << "D";}
+    ~D() {cout << "~D";}
+};
+
+int main() {
+    B *pb = new D();
+    delete pb;
+}
+```
+
+**Nu compilează**.
+
+>[!info] Explicație
+>Avem moștenire privată. Nu putem face `B *pb = new D()`. 
+>Soluție, modificăm moștenirea în public C -> D în public.
+
+### Ex 4. 
+
+```cpp 
+#include <iostream>
+using namespace std;
+
+class B {
+protected:
+    int x;
+public:
+    B(int i = 0): x(i) {}
+    operator int() {return x;}
+};
+
+class D: public B{
+public:
+    D(int i = 0):B(i) {}
+    operator B() {return B();}
+    operator float() {return x;}
+};
+
+int main() {
+    D ob(12);
+    try { throw ob; }
+    catch (float a) {cout<< "A";}
+    catch (B b) {cout << "B";}
+    catch (D d) {cout << "C";}
+    catch (...) {cout << "D";}
+    return 0;
+}
+```
+
+ Compilează. Afișează B. 
+

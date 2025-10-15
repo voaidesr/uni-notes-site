@@ -6,7 +6,7 @@
 
 Permite identificarea tipului unui obiect în timpul execuției programului. 
 - acesta nu există în limbaje nepolimorfice (e.g., C), pentru că tipul este cunoscut de la compilare
-- C++ implementează polimorfismul prin [[Courses/OOP/poo.c5#Moștenirea\|moștenire]], [[Courses/OOP/poo.c6#Funcții virtuale\|funcții virtuale]] și pointeri la clasa de bază care pot fi utilizați pentru a arăta către obiecte derivate $\implies$ tipul obiectului nu poate fi cunoscut *a priori* $\implies$ determinarea se face la execuție, prin RTTI. 
+- C++ implementează polimorfismul prin [[Courses/OOP/poo.c5#Moștenirea\|moștenire]], [[Courses/OOP/poo.c6#Funcții virtuale\|funcții virtuale]] și pointeri la clasa de bază care pot fi utilizați pentru a arăta către obiecte derivate $\implies$ tipul obiectului nu poate fi cunoscut *a priori* $\implies$ determinarea se face la execuție, prin RTTI.  
 
 ## `type_id`
 
@@ -184,7 +184,7 @@ Sintaxa:
 reinterpret_cast<type>(p);
 ```
 
-# Șabloane (templates) 
+# Șabloane 
 
 ## Funcții generice 
 

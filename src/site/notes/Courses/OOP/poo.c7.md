@@ -84,7 +84,7 @@ int main()
 }
 ```
 
-Prima problemă -> memory leaks, nu se dezalocă niciodat pointerii alocați în `Orchestra`.
+Prima problemă -> memory leaks, nu se dezalocă niciodată pointerii alocați în `Orchestra`.
 
 *idee* -> destructor pentru Orchestra, care dezalocă pointerii. Duce la altă problemă, la copiere implicită de obiecte , se face shallow copy (sunt copiate adresele pointerilor), lucru ce va duce la ștergerea acelorași zone din memorie de mai multe ori (*nu e eroare de compilare, dar risky*)
 
@@ -144,7 +144,7 @@ Instrument* Violin::clone() const
 }
 ```
 
-Deci `Orchestrnevirtualăa` permite copiere:
+Deci Orchestra virtuala permite copiere:
 
 ```cpp
 Orchestra::Orchestra(const Orchestra& other)
