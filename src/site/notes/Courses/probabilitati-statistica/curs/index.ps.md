@@ -12,3 +12,4 @@
 # Lab
 
 1. [[Courses/probabilitati-statistica/curs/l3.ps\|Lab 3]]
+2. [[Courses/probabilitati-statistica/l4.ps\|Lab 4]]
