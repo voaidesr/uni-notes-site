@@ -9,7 +9,7 @@
 3. [[Courses/probabilitati-statistica/curs/c3.ps\|Cursul 3]]
 4. [[Courses/probabilitati-statistica/curs/c4.ps\|Cursul 4]]
 5. [[Courses/probabilitati-statistica/curs/c5.ps\|Cursul 5]]
-6. [[Courses/probabilitati-statistica/curs/c6.ps\|Cursul 6]]
+6. [[Courses/probabilitati-statistica/curs/c6.ps\|Cursul 6]] 
 
 # Lab
 
