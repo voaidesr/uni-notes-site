@@ -3,3 +3,4 @@
 ---
 
 1. [[Courses/probabilitati-statistica/curs/index.ps\|Probabilități și Statistică]]
+2. [[AI/ai/uni/index.ai\|Seminare AI]] 
