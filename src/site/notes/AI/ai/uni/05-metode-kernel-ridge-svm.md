@@ -163,6 +163,7 @@ $$
 $$
 
 
+
 Iar forma închisă va deveni 
 
 $$
@@ -260,7 +261,13 @@ $$
 $$
 
 >[!important]
->Acesta este simplificat, pentru un kernel liniar, în mod normal avem formula $$ \mathbf{K} = (\langle \mathbf{x_{t}}, \mathbf{x} \rangle + 1) \cdot d $$ unde $d$ este gradul.
+>Acesta este simplificat, pentru un kernel liniar, în mod normal avem formula 
+>
+>$$ 
+>\mathbf{K} = (\langle \mathbf{x_{t}}, \mathbf{x} \rangle + 1) \cdot d 
+>$$ 
+>
+>unde $d$ este gradul.
 
 # Funcții kernel
 
