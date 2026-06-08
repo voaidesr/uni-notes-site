@@ -157,9 +157,7 @@ Atunci problema este prost pusă și trebuie utlizată regularizarea.
 Funcția de pierdere devine 
 
 $$
-\mathcal{L}_{\lambda}(\mathbf{w}, S) = \sum_{i = 1}^l (y_{i} - g(x_{i}))^2 + \lambda |\!| \mathbf{w} |\!|
-{ #2}
-
+\mathcal{L}_{\lambda}(\mathbf{w}, S) = \sum_{i = 1}^l (y_{i} - g(x_{i}))^2 + \lambda |\!| \mathbf{w} |\!|^2
 $$
 
 
