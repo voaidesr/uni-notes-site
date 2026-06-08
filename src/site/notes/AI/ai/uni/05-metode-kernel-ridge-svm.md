@@ -4,7 +4,7 @@
 
 # Perceptronul 
 
-Ia inputuri și prezice pe baza unei ecuații liniare: 
+Ia inputuri și prezice pe baza unei ecuații liniare : 
 
 $$
 y = \mathrm{sgn}(\mathbf{w}^T \cdot \mathbf{x} + b)
