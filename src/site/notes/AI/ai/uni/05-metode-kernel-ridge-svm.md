@@ -67,14 +67,32 @@ Forma primală optimizează pe numărul de trăsături și are nevoie de coordon
 >Funcția nucleu mai este numită și funcție de **similaritate**.
 
 Pentru a scrie în forma duală, putem scrie matricea Gram (matricea tuturor produselor scalare posibile)
-$$ X = \begin{pmatrix} x_{1} \\ x_{2} \\ \vdots \\ x_{n} \end{pmatrix} $$ Unde $x_{i}$ este un rând cu un număr de feature-uri.  Matricea Gram $$ K_{X} = X X^{\top}   $$ Practic  $$ K_{X} = \begin{pmatrix} x_{1} x_{1}^{\top} & x_{1} x_{2}^{\top}  &  \dots & x_{1} x_{n}^{\top} \\ \dots  & \dots & \dots & \dots \\ x_{n} x_{1}^{\top} & x_{n} x_{2}^{\top} &\dots & x_{n} x_{n}^{\top} \end{pmatrix} $$ Iar această matrice va avea dimensiunea $n \times n$.  Putem scrie 
+
+$$
+X = \begin{pmatrix} x_{1} \\ x_{2} \\ \vdots \\ x_{n} \end{pmatrix} 
+$$
+Unde $x_{i}$ este un rând cu un număr de feature-uri.  Matricea Gram 
+
+$$ 
+K_{X} = X X^{\top}
+$$
+Practic  
+
+$$ 
+K_{X} = \begin{pmatrix} x_{1} x_{1}^{\top} & x_{1} x_{2}^{\top}  &  \dots & x_{1} x_{n}^{\top} \\ \dots  & \dots & \dots & \dots \\ x_{n} x_{1}^{\top} & x_{n} x_{2}^{\top} &\dots & x_{n} x_{n}^{\top} \end{pmatrix} 
+$$
+Iar această matrice va avea dimensiunea $n \times n$.  Putem scrie 
+
 $$
 \mathbf{w} \cdot x + b = K_{X} \cdot \alpha' + b
 $$
+
 unde 
+
 $$
 \alpha' = (\alpha_{1}, \alpha_{2}, \dots, \alpha_{n})^{\top}
 $$
+
 Deci clasificatorul depinde numai de numărul de exemple $n$. 
 
 # Regresia liniară 
@@ -84,40 +102,51 @@ Vrem să găsim o funcție $g$ de forma
 $$
 g(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle = \mathbf{w}^{\top} \mathbf{x}
 $$
+
 Care interpolează cel mai bine o mulțime de puncte 
 
 $$
 S = \left\{ (\mathbf{x_{1}}, y_{1}), (\mathbf{x}_{2}, y_{2}), \dots, (\mathbf{x}_{l}, y_{l}) \right\}
 $$
+
 Adică găsim practic un polinom care să producă cea mai mică eroare 
 
 $$
 \mathcal{L}(g, S) = \sum_{i = 1}^l(y_{i} - g(\mathbf{x}_{i}))^2
 $$
+
 Funcția de pierdere, scrisă vectorial este 
 
 $$
 \mathbf{\xi} = \mathbf{y} - \mathbf{X} \mathbf{w}
 $$
+
 Iar valoarea este norma la pătrat
 
 $$
 \mathcal{L}(g, S) = \xi^{\top}\xi
 $$
+
 Valoarea optimă se obține prin a găsi minimul, în funcție de $\mathbf{w}$. 
 
 $$
 \frac{\partial\mathcal{L}(\mathbf{w}, S)}{\partial \mathbf{w}} = 0
 $$
-Deci $$
+
+Deci
+
+$$
 -2 \mathbf{X}^{\top}\mathbf{y} + 2 \mathbf{X}^{\top}\mathbf{X}\mathbf{w} = \mathbf{0}
 $$
+
 $$
 \mathbf{X}^{\top} \mathbf{X} \mathbf{w} = \mathbf{X}^{\top}\mathbf{y}
 $$
+
 $$
 \mathbf{w} = (\mathbf{X}^{\top} \mathbf{X})^{-1}\mathbf{X}^{\top}\mathbf{y}
 $$
+
 # Regresia Ridge 
 
 >[!danger]
@@ -133,11 +162,13 @@ $$
 
 $$
 
+
 Iar forma închisă va deveni 
 
 $$
 \mathbf{w} = (\mathbf{X}^{\top}\mathbf{X} + \lambda I_{n})^{-1} \mathbf{X}^{\top} \mathbf{y}
 $$
+
 
 ## Regresia Ridge (în formă duală) 
 
@@ -153,14 +184,21 @@ $$
 \end{align}
 $$
 
-Iar $$
+
+Iar 
+
+$$
 \mathbf{w} = \mathbf{X}^{\top}\alpha
 $$
+
 Deci forma finală va fi 
+
 $$
 \alpha = \lambda^{-1} (\mathbf{y} - \mathbf{X}\mathbf{X}^{\top}\alpha)
 $$
+
 Deci 
+
 $$
 (\mathbf{X}\mathbf{X}^{\top} + \lambda I_{n})\alpha = \mathbf{y}
 $$
@@ -170,16 +208,19 @@ Iar vectorul coloana $\alpha$ va fi
 $$
 \alpha = (\mathbf{X} \mathbf{X}^{\top} + \lambda I_{n})^{-1} \mathbf{y}
 $$
+
 În forma duală informația despre datele de antrenare este dată de matricea Gram
 
 $$
 \mathbf{G} = \mathbf{X}\mathbf{X}^{\top}
 $$
+
 Iar funcția de predicție este 
 
 $$
 g(\mathbf{x}) = \sum_{i=1}^n \alpha_{i} \langle \mathbf{x_{i}}, \mathbf{x}  \rangle 
 $$
+
 >[!important]
 >Kernel trick reprezintă doar a înlocui produsul scalar canonic cu o funcție kernel. 
 
@@ -199,21 +240,25 @@ k(x_{n}, x_{1})  & k(x_{n}, x_{2}) &  \dots & k(x_{n}, x_{n})
 \end{pmatrix}
 $$
 
+
 Ponderile duale se calculează 
 
 $$
 \mathbf{\alpha} = (\mathbf{K} + \lambda I_{n})^{-1} \mathbf{y}
 $$
+
 Iar predicția va deveni 
 
 $$
 g(\mathbf{x}) = \sum_{i = 1}^n \alpha_{i}k(x_{i}, x)
 $$
+
 Deci predicția, vectorial va fi 
 
 $$
 \mathbf{\hat{y}} = \mathbf{K}\alpha
 $$
+
 >[!important]
 >Acesta este simplificat, pentru un kernel liniar, în mod normal avem formula $$ \mathbf{K} = (\langle \mathbf{x_{t}}, \mathbf{x} \rangle + 1) \cdot d $$ unde $d$ este gradul.
 
