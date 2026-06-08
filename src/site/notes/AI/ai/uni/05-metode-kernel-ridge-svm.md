@@ -49,7 +49,8 @@ Predicția va fi
 
 $$
 y = \left\langle  \sum_{i = 1}^n \alpha_{i}x_{i}, x\right\rangle 
-$$Unde $x_{i}$ sunt punctele din antrenare și $x$ este un punct oarecare.
+$$
+Unde $x_{i}$ sunt punctele din antrenare și $x$ este un punct oarecare.
 Deci, din proprietățile produsului scalar 
 
 $$
